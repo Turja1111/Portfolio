@@ -1,0 +1,79 @@
+{% extends 'dashboard/base.html' %} {% block title %}Messages{% endblock %} {%
+block page_title %}Messages{% endblock %} {% block page_subtitle %}Contact form
+submissions{% endblock %} {% block nav_messages %}active{% endblock %} {% block
+content %} {% if msgs %}
+<div class="space-y-4">
+  {% for msg in msgs %}
+  <div
+    class="card {% if not msg.is_read %}border-indigo-500/40 bg-indigo-950/20{% endif %}"
+  >
+    <div class="flex items-start justify-between gap-4">
+      <div class="flex items-start gap-4 flex-1 min-w-0">
+        <div
+          class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold shrink-0"
+        >
+          {{ msg.name|first|upper }}
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="font-semibold text-white">{{ msg.name }}</span>
+            {% if not msg.is_read %}<span
+              class="px-2 py-0.5 bg-indigo-600 text-white text-xs rounded-full font-semibold"
+              >New</span
+            >{% endif %}
+            <span class="text-xs text-slate-500 ml-auto"
+              >{{ msg.created_at|date:"M d, Y H:i" }}</span
+            >
+          </div>
+          <div class="text-sm text-indigo-300 mt-0.5">
+            <a href="mailto:{{ msg.email }}" class="hover:underline"
+              >{{ msg.email }}</a
+            >
+            {% if msg.phone %} ·
+            <span class="text-slate-400">{{ msg.phone }}</span>{% endif %}
+          </div>
+          {% if msg.subject %}
+          <div class="text-sm font-medium text-slate-300 mt-2">
+            {{ msg.subject }}
+          </div>
+          {% endif %}
+          <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+            {{ msg.body }}
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-2 shrink-0">
+        {% if not msg.is_read %}
+        <a
+          href="{% url 'dashboard:message_read' msg.pk %}"
+          class="text-slate-500 hover:text-green-400 transition p-2 rounded-lg hover:bg-slate-700"
+          title="Mark as read"
+          ><i class="fa-solid fa-check"></i
+        ></a>
+        {% endif %}
+        <a
+          href="mailto:{{ msg.email }}"
+          class="text-slate-500 hover:text-indigo-400 transition p-2 rounded-lg hover:bg-slate-700"
+          title="Reply"
+          ><i class="fa-solid fa-reply"></i
+        ></a>
+        <a
+          href="{% url 'dashboard:message_delete' msg.pk %}"
+          class="text-slate-500 hover:text-red-400 transition p-2 rounded-lg hover:bg-slate-700"
+          title="Delete"
+          ><i class="fa-solid fa-trash"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card text-center py-20">
+  <i class="fa-solid fa-inbox text-5xl text-slate-600 mb-5 block"></i>
+  <h2 class="text-xl font-bold text-slate-300 mb-2">No messages yet</h2>
+  <p class="text-slate-500">
+    Messages from your contact form will appear here.
+  </p>
+</div>
+{% endif %} {% endblock %}

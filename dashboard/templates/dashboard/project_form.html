@@ -1,0 +1,82 @@
+{% extends 'dashboard/base.html' %} {% block title %}{{ action }} Project{%
+endblock %} {% block page_title %}{{ action }} Project{% endblock %} {% block
+page_subtitle %}{% if action == 'Create' %}Add a new project to your portfolio{%
+else %}Update project details{% endif %}{% endblock %} {% block nav_projects
+%}active{% endblock %} {% block content %}
+<div class="max-w-2xl">
+  <div class="card">
+    <form method="POST" class="space-y-5">
+      {% csrf_token %}
+      <div>
+        <label class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+          >Title *</label
+        >
+        {{ form.title }} {% if form.title.errors %}
+        <p class="text-red-400 text-xs mt-1">{{ form.title.errors.0 }}</p>
+        {% endif %}
+      </div>
+      <div>
+        <label class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+          >Short Description *</label
+        >
+        {{ form.description }}
+      </div>
+      <div>
+        <label class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+          >Full Description</label
+        >
+        {{ form.long_description }}
+      </div>
+      <div>
+        <label class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+          >Tech Stack (comma-separated)</label
+        >
+        {{ form.tech_stack }}
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label
+            class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+            >GitHub URL</label
+          >
+          {{ form.github_url }}
+        </div>
+        <div>
+          <label
+            class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+            >Live URL</label
+          >
+          {{ form.live_url }}
+        </div>
+      </div>
+      <div>
+        <label class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+          >Image URL</label
+        >
+        {{ form.image_url }}
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label
+            class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
+            >Order</label
+          >
+          {{ form.order }}
+        </div>
+        <div class="flex items-center gap-3 pt-7">
+          {{ form.featured }}
+          <label class="text-sm text-slate-300">Featured project</label>
+        </div>
+      </div>
+      <div class="flex gap-3 pt-2">
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-save mr-2"></i>{{ action }} Project
+        </button>
+        <a href="{% url 'dashboard:projects' %}" class="btn-secondary"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

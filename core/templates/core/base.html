@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}Turja Das — Full Stack Developer{% endblock %}
+    </title>
+    <meta
+      name="description"
+      content="{% block description %}Full-stack developer specializing in Python, Django, and modern web technologies.{% endblock %}"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+            colors: {
+              brand: { DEFAULT: "#6366f1", dark: "#4f46e5", light: "#818cf8" },
+            },
+            animation: {
+              "fade-up": "fadeUp 0.6s ease forwards",
+              float: "float 6s ease-in-out infinite",
+              "pulse-slow": "pulse 4s cubic-bezier(0.4,0,0.6,1) infinite",
+            },
+            keyframes: {
+              fadeUp: {
+                "0%": { opacity: 0, transform: "translateY(30px)" },
+                "100%": { opacity: 1, transform: "translateY(0)" },
+              },
+              float: {
+                "0%,100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      :root {
+        scroll-behavior: smooth;
+      }
+      .dark {
+        --bg: #0f172a;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .glass-light {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .grad-text {
+        background: linear-gradient(
+          135deg,
+          #6366f1 0%,
+          #a855f7 50%,
+          #ec4899 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .blob {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        animation: blob 8s ease-in-out infinite;
+      }
+      @keyframes blob {
+        0%,
+        100% {
+          border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+        50% {
+          border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+        }
+      }
+      .skill-bar-fill {
+        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #6366f1, #a855f7);
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-8px);
+      }
+      [data-aos] {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.7s ease;
+      }
+      [data-aos].aos-animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body
+    class="dark bg-slate-900 text-slate-100 font-sans antialiased transition-colors duration-300"
+  >
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="fixed top-0 w-full z-50 transition-all duration-300"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <a href="#home" class="text-xl font-black tracking-tight">
+          <span class="grad-text">TD.</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <ul class="hidden md:flex items-center gap-8">
+          <li>
+            <a
+              href="#home"
+              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#about"
+              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#skills"
+              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
+              >Skills</a
+            >
+          </li>
+          <li>
+            <a
+              href="#projects"
+              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <!-- Right controls -->
+        <div class="flex items-center gap-4">
+          <!-- Theme toggle -->
+          <button
+            id="themeToggle"
+            class="p-2 rounded-lg glass text-slate-300 hover:text-white transition"
+            aria-label="Toggle theme"
+          >
+            <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
+          </button>
+          <!-- Mobile menu -->
+          <button
+            id="menuToggle"
+            class="md:hidden p-2 rounded-lg glass text-slate-300"
+          >
+            <i class="fa-solid fa-bars text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden glass border-t border-white/10"
+      >
+        <ul class="px-6 py-4 flex flex-col gap-3">
+          <li>
+            <a
+              href="#home"
+              class="block text-slate-300 hover:text-white py-2 transition"
+              onclick="
+                document.getElementById('mobileMenu').classList.add('hidden')
+              "
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#about"
+              class="block text-slate-300 hover:text-white py-2 transition"
+              onclick="
+                document.getElementById('mobileMenu').classList.add('hidden')
+              "
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#skills"
+              class="block text-slate-300 hover:text-white py-2 transition"
+              onclick="
+                document.getElementById('mobileMenu').classList.add('hidden')
+              "
+              >Skills</a
+            >
+          </li>
+          <li>
+            <a
+              href="#projects"
+              class="block text-slate-300 hover:text-white py-2 transition"
+              onclick="
+                document.getElementById('mobileMenu').classList.add('hidden')
+              "
+              >Projects</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="block text-slate-300 hover:text-white py-2 transition"
+              onclick="
+                document.getElementById('mobileMenu').classList.add('hidden')
+              "
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-10 mt-20">
+      <div
+        class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4"
+      >
+        <p class="text-slate-400 text-sm">
+          © 2025 <span class="grad-text font-semibold">Turja Das</span>. Built
+          with Django &amp; Tailwind.
+        </p>
+        <div class="flex items-center gap-5">
+          <a
+            href="https://github.com/turja-das"
+            target="_blank"
+            class="text-slate-400 hover:text-white transition text-lg"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+          <a
+            href="https://linkedin.com/in/turja-das"
+            target="_blank"
+            class="text-slate-400 hover:text-indigo-400 transition text-lg"
+            ><i class="fa-brands fa-linkedin"></i
+          ></a>
+          <a
+            href="mailto:turja.das@email.com"
+            class="text-slate-400 hover:text-pink-400 transition text-lg"
+            ><i class="fa-solid fa-envelope"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // ── Theme Toggle ──────────────────────────────────────────────
+      const html = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      applyTheme(savedTheme);
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          html.classList.add("dark");
+          html.classList.remove("light");
+          document.body.classList.replace("bg-white", "bg-slate-900");
+          document.body.classList.replace("text-slate-900", "text-slate-100");
+          themeIcon.className = "fa-solid fa-moon text-sm";
+        } else {
+          html.classList.remove("dark");
+          html.classList.add("light");
+          document.body.style.background = "#f8fafc";
+          document.body.style.color = "#0f172a";
+          themeIcon.className = "fa-solid fa-sun text-sm text-yellow-400";
+        }
+        localStorage.setItem("theme", theme);
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const current = localStorage.getItem("theme") || "dark";
+        applyTheme(current === "dark" ? "light" : "dark");
+      });
+
+      // ── Navbar scroll effect ──────────────────────────────────────
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("glass", "shadow-xl");
+        } else {
+          navbar.classList.remove("glass", "shadow-xl");
+        }
+      });
+
+      // ── Mobile menu ───────────────────────────────────────────────
+      document.getElementById("menuToggle").addEventListener("click", () => {
+        document.getElementById("mobileMenu").classList.toggle("hidden");
+      });
+
+      // ── AOS (Animate on Scroll) ───────────────────────────────────
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("aos-animate");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll("[data-aos]")
+        .forEach((el) => observer.observe(el));
+
+      // ── Skill bars ────────────────────────────────────────────────
+      const skillObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+                bar.style.width = bar.dataset.width;
+              });
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      const skillsSection = document.getElementById("skills");
+      if (skillsSection) skillObserver.observe(skillsSection);
+    </script>
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,108 @@
+{% extends 'dashboard/base.html' %} {% block title %}Projects{% endblock %} {%
+block page_title %}Projects{% endblock %} {% block page_subtitle %}Manage your
+portfolio projects{% endblock %} {% block nav_projects %}active{% endblock %} {%
+block header_actions %}
+<a href="{% url 'dashboard:project_create' %}" class="btn-primary">
+  <i class="fa-solid fa-plus mr-2"></i>New Project
+</a>
+{% endblock %} {% block content %} {% if projects %}
+<div class="card overflow-hidden p-0">
+  <table class="w-full">
+    <thead>
+      <tr class="border-b border-slate-700/60">
+        <th
+          class="text-left px-6 py-4 text-xs text-slate-400 uppercase tracking-wide font-semibold"
+        >
+          Project
+        </th>
+        <th
+          class="text-left px-6 py-4 text-xs text-slate-400 uppercase tracking-wide font-semibold hidden md:table-cell"
+        >
+          Tech Stack
+        </th>
+        <th
+          class="text-left px-6 py-4 text-xs text-slate-400 uppercase tracking-wide font-semibold hidden lg:table-cell"
+        >
+          Status
+        </th>
+        <th
+          class="text-right px-6 py-4 text-xs text-slate-400 uppercase tracking-wide font-semibold"
+        >
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-700/40">
+      {% for project in projects %}
+      <tr class="hover:bg-slate-700/20 transition">
+        <td class="px-6 py-4">
+          <div class="font-semibold text-white text-sm">
+            {{ project.title }}
+          </div>
+          <div class="text-xs text-slate-500 mt-0.5 truncate max-w-xs">
+            {{ project.description|truncatechars:60 }}
+          </div>
+        </td>
+        <td class="px-6 py-4 hidden md:table-cell">
+          <div class="flex flex-wrap gap-1">
+            {% for tech in project.get_tech_list|slice:":3" %}
+            <span
+              class="px-2 py-0.5 bg-indigo-600/20 text-indigo-300 text-xs rounded border border-indigo-500/30"
+              >{{ tech }}</span
+            >
+            {% endfor %}
+          </div>
+        </td>
+        <td class="px-6 py-4 hidden lg:table-cell">
+          {% if project.featured %}
+          <span
+            class="px-2 py-1 bg-green-500/20 text-green-300 text-xs rounded-full border border-green-500/30"
+            >Featured</span
+          >
+          {% else %}
+          <span
+            class="px-2 py-1 bg-slate-600/40 text-slate-400 text-xs rounded-full"
+            >Normal</span
+          >
+          {% endif %}
+        </td>
+        <td class="px-6 py-4 text-right">
+          <div class="flex items-center justify-end gap-2">
+            {% if project.live_url %}<a
+              href="{{ project.live_url }}"
+              target="_blank"
+              class="text-slate-500 hover:text-white transition text-sm p-1.5 rounded-lg hover:bg-slate-700"
+              title="View site"
+              ><i class="fa-solid fa-arrow-up-right-from-square"></i></a
+            >{% endif %}
+            <a
+              href="{% url 'dashboard:project_edit' project.pk %}"
+              class="text-slate-500 hover:text-indigo-400 transition text-sm p-1.5 rounded-lg hover:bg-slate-700"
+              title="Edit"
+              ><i class="fa-solid fa-pencil"></i
+            ></a>
+            <a
+              href="{% url 'dashboard:project_delete' project.pk %}"
+              class="text-slate-500 hover:text-red-400 transition text-sm p-1.5 rounded-lg hover:bg-slate-700"
+              title="Delete"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="card text-center py-20">
+  <i class="fa-solid fa-code-branch text-5xl text-slate-600 mb-5 block"></i>
+  <h2 class="text-xl font-bold text-slate-300 mb-2">No projects yet</h2>
+  <p class="text-slate-500 mb-6">
+    Add your first project to showcase your work.
+  </p>
+  <a href="{% url 'dashboard:project_create' %}" class="btn-primary">
+    <i class="fa-solid fa-plus mr-2"></i>Create First Project
+  </a>
+</div>
+{% endif %} {% endblock %}
