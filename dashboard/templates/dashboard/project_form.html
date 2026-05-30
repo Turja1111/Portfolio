@@ -1,8 +1,12 @@
-{% extends 'dashboard/base.html' %} {% block title %}{{ action }} Project{%
-endblock %} {% block page_title %}{{ action }} Project{% endblock %} {% block
-page_subtitle %}{% if action == 'Create' %}Add a new project to your portfolio{%
-else %}Update project details{% endif %}{% endblock %} {% block nav_projects
-%}active{% endblock %} {% block content %}
+{% extends 'dashboard/base.html' %} 
+{% block title %}{{ action }} Project{%endblock %} 
+{% block page_title %}{{ action }} Project{% endblock %} 
+{% block page_subtitle %}
+    {% if action == 'Create' %}Add a new project to your portfolio
+    {%else %}Update project details{% endif %}
+{% endblock %}       
+{% block nav_projects%}active{% endblock %} 
+{% block content %}
 <div class="max-w-2xl">
   <div class="card">
     <form method="POST" class="space-y-5">

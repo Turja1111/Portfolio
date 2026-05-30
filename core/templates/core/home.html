@@ -1,595 +1,381 @@
-{% extends 'core/base.html' %} {% block title %}Turja Das — Full Stack Developer
-& Django Expert{% endblock %} {% block body %}
+{% extends 'core/base.html' %}
+{% load static %}
 
-<!-- ── HERO ─────────────────────────────────────────────────── -->
-<section
-  id="home"
-  class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div
-      class="blob absolute top-20 -left-32 w-96 h-96 bg-indigo-600/20 filter blur-3xl"
-    ></div>
-    <div
-      class="blob absolute bottom-20 -right-32 w-96 h-96 bg-purple-600/20 filter blur-3xl"
-      style="animation-delay: 3s"
-    ></div>
-    <div
-      class="blob absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-600/10 filter blur-3xl"
-      style="animation-delay: 6s"
-    ></div>
-    <div
-      class="absolute inset-0"
-      style="
-        background-image: radial-gradient(
-          rgba(99, 102, 241, 0.15) 1px,
-          transparent 1px
-        );
-        background-size: 40px 40px;
-      "
-    ></div>
-  </div>
+{% block title %}Turja Das | Full Stack Developer & Django Expert{% endblock %}
 
-  <div
-    class="relative max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-16 items-center"
-  >
-    <div>
-      <div
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-indigo-300 text-sm font-medium mb-8 animate-fade-up"
-      >
-        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-        Available for hire
-      </div>
-      <h1
-        class="text-5xl lg:text-7xl font-black leading-tight mb-6 animate-fade-up"
-        style="animation-delay: 0.1s"
-      >
-        Hi, I'm<br /><span class="grad-text">Turja Das</span>
-      </h1>
-      <p
-        class="text-xl lg:text-2xl text-slate-400 font-light mb-4 animate-fade-up"
-        style="animation-delay: 0.2s"
-      >
-        Full Stack Developer &amp; DevOps Enthusiast
-      </p>
-      <p
-        class="text-slate-500 leading-relaxed mb-10 max-w-lg animate-fade-up"
-        style="animation-delay: 0.3s"
-      >
-        I build scalable, production-ready web applications using Django,
-        Docker, and modern DevOps practices. Passionate about clean code and
-        beautiful UIs.
-      </p>
-      <div
-        class="flex flex-wrap gap-4 animate-fade-up"
-        style="animation-delay: 0.4s"
-      >
-        <a
-          href="#projects"
-          class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5"
-        >
-          View Projects <i class="fa-solid fa-arrow-right ml-2"></i>
-        </a>
-        <a
-          href="#contact"
-          class="px-8 py-4 glass text-white font-semibold rounded-xl transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5"
-        >
-          Get In Touch
-        </a>
-      </div>
-      <div
-        class="flex items-center gap-5 mt-10 animate-fade-up"
-        style="animation-delay: 0.5s"
-      >
-        <a
-          href="https://github.com/turja-das"
-          target="_blank"
-          class="text-slate-400 hover:text-white transition text-xl"
-          ><i class="fa-brands fa-github"></i
-        ></a>
-        <a
-          href="https://linkedin.com/in/turja-das"
-          target="_blank"
-          class="text-slate-400 hover:text-indigo-400 transition text-xl"
-          ><i class="fa-brands fa-linkedin"></i
-        ></a>
-        <a
-          href="mailto:turja.das@email.com"
-          class="text-slate-400 hover:text-pink-400 transition text-xl"
-          ><i class="fa-solid fa-envelope"></i
-        ></a>
-        <div class="w-px h-6 bg-slate-700"></div>
-        <span class="text-slate-500 text-sm">turja.das@email.com</span>
-      </div>
-    </div>
+{% block body %}
+<main>
+  <section id="home" class="relative flex min-h-screen items-center overflow-hidden pt-24">
+    <div class="absolute inset-x-0 top-24 h-px bg-gradient-to-r from-transparent via-cyan-300/40 to-transparent"></div>
+    <div class="mx-auto grid w-full max-w-7xl items-center gap-14 px-6 py-16 lg:grid-cols-[1.05fr_.95fr]">
+      <div class="relative z-10">
+        <div class="mb-7 inline-flex items-center gap-3 rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-200 animate-fade-up">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-70"></span>
+            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-300"></span>
+          </span>
+          Available for full-stack and DevOps work
+        </div>
 
-    <div
-      class="hidden lg:flex justify-center items-center animate-fade-up"
-      style="animation-delay: 0.3s"
-    >
-      <div class="relative animate-float">
-        <div
-          class="w-80 h-80 rounded-3xl glass flex items-center justify-center relative overflow-hidden"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20"
-          ></div>
-          <div class="text-center relative z-10">
-            <div class="text-8xl mb-4">👨‍💻</div>
-            <p class="text-indigo-300 font-semibold">Full Stack Dev</p>
-            <p class="text-slate-400 text-sm mt-1">Django · Docker · DevOps</p>
-          </div>
-        </div>
-        <div
-          class="absolute -top-4 -right-4 glass px-4 py-2 rounded-xl text-sm font-semibold text-indigo-300"
-        >
-          <i class="fa-brands fa-python text-yellow-400 mr-1"></i> Python
-        </div>
-        <div
-          class="absolute -bottom-4 -left-4 glass px-4 py-2 rounded-xl text-sm font-semibold text-green-300"
-        >
-          <i class="fa-brands fa-docker text-blue-400 mr-1"></i> Docker
-        </div>
-        <div
-          class="absolute top-1/2 -right-14 glass px-4 py-2 rounded-xl text-sm font-semibold text-purple-300"
-        >
-          <i class="fa-solid fa-database text-purple-400 mr-1"></i> PostgreSQL
-        </div>
-      </div>
-    </div>
-  </div>
+        <h1 class="max-w-4xl text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl animate-fade-up" style="animation-delay: .08s">
+          Building clean systems with a <span class="grad-text">visual edge.</span>
+        </h1>
 
-  <div
-    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 animate-bounce"
-  >
-    <span class="text-xs uppercase tracking-widest">Scroll</span>
-    <i class="fa-solid fa-chevron-down text-xs"></i>
-  </div>
-</section>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl animate-fade-up" style="animation-delay: .16s">
+          I am Turja Das, a full-stack developer focused on Django, PostgreSQL, Docker, and interfaces that feel fast, calm, and polished.
+        </p>
 
-<!-- ── ABOUT ──────────────────────────────────────────────────── -->
-<section id="about" class="py-32">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid lg:grid-cols-2 gap-20 items-center">
-      <div data-aos class="relative">
-        <div class="glass rounded-3xl p-10">
-          <div class="grid grid-cols-2 gap-6 mb-8">
-            <div
-              class="text-center p-6 rounded-2xl bg-indigo-600/10 border border-indigo-500/20"
-            >
-              <div class="text-4xl font-black grad-text mb-2">3+</div>
-              <div class="text-slate-400 text-sm">Years Experience</div>
-            </div>
-            <div
-              class="text-center p-6 rounded-2xl bg-purple-600/10 border border-purple-500/20"
-            >
-              <div class="text-4xl font-black grad-text mb-2">10+</div>
-              <div class="text-slate-400 text-sm">Projects Built</div>
-            </div>
-            <div
-              class="text-center p-6 rounded-2xl bg-pink-600/10 border border-pink-500/20"
-            >
-              <div class="text-4xl font-black grad-text mb-2">5+</div>
-              <div class="text-slate-400 text-sm">Technologies</div>
-            </div>
-            <div
-              class="text-center p-6 rounded-2xl bg-green-600/10 border border-green-500/20"
-            >
-              <div class="text-4xl font-black grad-text mb-2">∞</div>
-              <div class="text-slate-400 text-sm">Curiosity</div>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            <span
-              class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-              >Django</span
-            >
-            <span
-              class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-              >Python</span
-            >
-            <span
-              class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-              >Docker</span
-            >
-            <span
-              class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-              >PostgreSQL</span
-            >
-            <span
-              class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-              >Linux</span
-            >
-            <span
-              class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-600/20 text-indigo-300 border border-indigo-500/30"
-              >CI/CD</span
-            >
-          </div>
-        </div>
-        <div
-          class="absolute -inset-2 bg-indigo-600/10 blur-2xl rounded-3xl -z-10"
-        ></div>
-      </div>
-
-      <div data-aos>
-        <span
-          class="text-indigo-400 font-semibold text-sm uppercase tracking-widest"
-          >About Me</span
-        >
-        <h2 class="text-4xl lg:text-5xl font-black mt-3 mb-6">
-          Crafting digital <span class="grad-text">experiences</span> that
-          matter
-        </h2>
-        <div class="space-y-4 text-slate-400 leading-relaxed">
-          <p>
-            I'm a passionate full-stack developer with expertise in building
-            scalable, production-ready web applications. My stack centers around
-            Python and Django, paired with modern DevOps practices.
-          </p>
-          <p>
-            I love architecting systems that are clean, maintainable, and
-            performant — from RESTful APIs to containerized deployments with
-            full CI/CD automation.
-          </p>
-          <p>
-            When I'm not coding, I'm exploring new technologies, contributing to
-            open source, or learning about system design and distributed
-            systems.
-          </p>
-        </div>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a
-            href="#projects"
-            class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl transition hover:-translate-y-0.5"
-          >
-            <i class="fa-solid fa-code-branch mr-2"></i>My Work
+        <div class="mt-9 flex flex-col gap-4 sm:flex-row animate-fade-up" style="animation-delay: .24s">
+          <a href="#projects" class="shine inline-flex items-center justify-center rounded-xl bg-cyan-300 px-7 py-4 font-extrabold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:-translate-y-1 hover:bg-cyan-200">
+            View Projects <i class="fa-solid fa-arrow-right ml-3"></i>
           </a>
-          <a
-            href="#"
-            class="px-6 py-3 glass text-slate-300 font-medium rounded-xl transition hover:bg-white/10 hover:-translate-y-0.5"
-          >
-            <i class="fa-solid fa-download mr-2"></i>Download CV
+          <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/10 px-7 py-4 font-semibold text-white transition hover:-translate-y-1 hover:bg-white/15">
+            Start a Conversation
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center gap-5 text-sm text-slate-400 animate-fade-up" style="animation-delay: .32s">
+          <a href="https://github.com/turja-das" target="_blank" class="inline-flex items-center gap-2 transition hover:text-white">
+            <i class="fa-brands fa-github text-lg"></i> GitHub
+          </a>
+          <a href="https://linkedin.com/in/turja-das" target="_blank" class="inline-flex items-center gap-2 transition hover:text-cyan-300">
+            <i class="fa-brands fa-linkedin text-lg"></i> LinkedIn
+          </a>
+          <a href="mailto:turja.das@email.com" class="inline-flex items-center gap-2 transition hover:text-amber-300">
+            <i class="fa-solid fa-envelope text-lg"></i> turja.das@email.com
           </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── SKILLS ──────────────────────────────────────────────────── -->
-<section id="skills" class="py-32 relative">
-  <div
-    class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent pointer-events-none"
-  ></div>
-  <div class="max-w-7xl mx-auto px-6 relative">
-    <div class="text-center mb-16" data-aos>
-      <span
-        class="text-indigo-400 font-semibold text-sm uppercase tracking-widest"
-        >What I Know</span
-      >
-      <h2 class="text-4xl lg:text-5xl font-black mt-3">
-        Tech <span class="grad-text">Stack</span>
-      </h2>
-      <p class="text-slate-400 mt-4 max-w-lg mx-auto">
-        A curated set of tools and technologies I use to bring ideas to life.
-      </p>
-    </div>
-
-    {% if skill_categories %}
-    <div class="space-y-12">
-      {% for category, cat_skills in skill_categories.items %}
-      <div data-aos>
-        <h3
-          class="text-lg font-semibold text-slate-300 mb-6 flex items-center gap-3"
-        >
-          <span class="w-8 h-px bg-indigo-500"></span>{{ category }}
-        </h3>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {% for skill in cat_skills %}
-          <div class="glass rounded-2xl p-5 card-hover group">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <span class="text-2xl">{{ skill.icon|default:"⚡" }}</span>
-                <span class="font-semibold text-slate-200"
-                  >{{ skill.name }}</span
-                >
+      <div class="relative z-10 mx-auto w-full max-w-md lg:max-w-none animate-fade-up" style="animation-delay: .2s">
+        <div class="relative">
+          <div class="absolute -inset-5 rounded-[2rem] border border-cyan-300/20"></div>
+          <div class="absolute -inset-10 rounded-[2.5rem] border border-amber-300/10 animate-spin-slow"></div>
+          <div class="glass relative overflow-hidden rounded-[2rem] p-4">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-slate-900">
+              <img
+                src="{% static 'picture/Turja.jpg' %}"
+                alt="Turja Das"
+                class="h-full w-full object-cover"
+                onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('grid');"
+              />
+              <div class="hidden h-full w-full place-items-center bg-gradient-to-br from-cyan-950 via-slate-900 to-amber-950">
+                <div class="text-center">
+                  <div class="mx-auto mb-5 grid h-24 w-24 place-items-center rounded-3xl border border-cyan-300/30 bg-cyan-300/10 text-4xl font-black text-cyan-100">TD</div>
+                  <p class="font-semibold text-slate-200">Add Turja.jpg in static/picture</p>
+                </div>
               </div>
-              <span class="text-sm text-indigo-400 font-bold"
-                >{{ skill.proficiency }}%</span
-              >
-            </div>
-            <div class="h-1.5 bg-slate-700/60 rounded-full overflow-hidden">
-              <div
-                class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full skill-bar-fill"
-                data-width="{{ skill.proficiency }}%"
-                style="width: 0%"
-              ></div>
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 to-transparent p-6">
+                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">Full Stack Developer</p>
+                <p class="mt-2 text-slate-300">Django / PostgreSQL / Docker / DevOps</p>
+              </div>
             </div>
           </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    {% else %}
-    <!-- Default skills shown until DB has data -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-aos>
-      {% for item in default_skills %}
-      <div class="glass rounded-2xl p-5 card-hover">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">{{ item.icon }}</span>
-            <span class="font-semibold text-slate-200">{{ item.name }}</span>
+
+          <div class="absolute -left-4 top-10 rounded-2xl border border-white/10 bg-slate-950/90 px-4 py-3 shadow-2xl backdrop-blur-md animate-float-soft">
+            <p class="text-xs uppercase tracking-widest text-slate-500">Backend</p>
+            <p class="font-bold text-cyan-200"><i class="fa-brands fa-python mr-2 text-amber-300"></i>Django</p>
           </div>
-          <span class="text-sm text-indigo-400 font-bold">{{ item.pct }}%</span>
-        </div>
-        <div class="h-1.5 bg-slate-700/60 rounded-full overflow-hidden">
-          <div
-            class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full skill-bar-fill"
-            data-width="{{ item.pct }}%"
-            style="width: 0%"
-          ></div>
+          <div class="absolute -right-4 bottom-16 rounded-2xl border border-white/10 bg-slate-950/90 px-4 py-3 shadow-2xl backdrop-blur-md animate-float-soft" style="animation-delay: 1.5s">
+            <p class="text-xs uppercase tracking-widest text-slate-500">Database</p>
+            <p class="font-bold text-emerald-200"><i class="fa-solid fa-database mr-2 text-emerald-300"></i>PostgreSQL</p>
+          </div>
         </div>
       </div>
-      {% endfor %}
     </div>
-    {% endif %}
-  </div>
-</section>
+  </section>
 
-<!-- ── PROJECTS ──────────────────────────────────────────────────── -->
-<section id="projects" class="py-32">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16" data-aos>
-      <span
-        class="text-indigo-400 font-semibold text-sm uppercase tracking-widest"
-        >Portfolio</span
-      >
-      <h2 class="text-4xl lg:text-5xl font-black mt-3">
-        Featured <span class="grad-text">Projects</span>
-      </h2>
-      <p class="text-slate-400 mt-4 max-w-lg mx-auto">
-        A selection of projects I've built — from concept to production.
-      </p>
-    </div>
-
-    {% if projects %}
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for project in projects %}
-      <div
-        data-aos
-        class="glass rounded-2xl overflow-hidden card-hover group flex flex-col"
-      >
-        <div
-          class="h-48 relative overflow-hidden bg-gradient-to-br from-indigo-900/50 via-purple-900/30 to-pink-900/20 flex items-center justify-center"
-        >
-          {% if project.image_url %}
-          <img
-            src="{{ project.image_url }}"
-            alt="{{ project.title }}"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          {% else %}
-          <div class="text-6xl opacity-50">🚀</div>
-          {% endif %} {% if project.featured %}
-          <span
-            class="absolute top-3 right-3 px-2 py-1 bg-indigo-600 text-white text-xs font-bold rounded-full"
-            >Featured</span
-          >
-          {% endif %}
+  <section id="about" class="py-28">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <div class="grid gap-4 sm:grid-cols-2" data-aos>
+        <div class="surface rounded-2xl p-6 card-hover">
+          <div class="text-4xl font-black grad-text">3+</div>
+          <p class="mt-2 text-sm text-slate-400">Years building web products</p>
         </div>
-        <div class="p-6 flex flex-col flex-1">
-          <h3
-            class="text-lg font-bold text-white mb-2 group-hover:text-indigo-300 transition"
-          >
-            {{ project.title }}
-          </h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-            {{ project.description }}
+        <div class="surface rounded-2xl p-6 card-hover">
+          <div class="text-4xl font-black grad-text">10+</div>
+          <p class="mt-2 text-sm text-slate-400">Projects shipped and refined</p>
+        </div>
+        <div class="surface rounded-2xl p-6 card-hover">
+          <div class="text-4xl font-black grad-text">5+</div>
+          <p class="mt-2 text-sm text-slate-400">Core technologies in daily use</p>
+        </div>
+        <div class="surface rounded-2xl p-6 card-hover">
+          <div class="text-4xl font-black grad-text">24/7</div>
+          <p class="mt-2 text-sm text-slate-400">Curiosity about better systems</p>
+        </div>
+      </div>
+
+      <div data-aos>
+        <span class="section-kicker">About Me</span>
+        <h2 class="mt-4 text-4xl font-black leading-tight text-white lg:text-5xl">
+          I turn practical ideas into dependable web applications.
+        </h2>
+        <div class="mt-6 space-y-4 text-slate-400 leading-8">
+          <p>
+            My stack centers on Python, Django, PostgreSQL, and Docker. I like building products that are simple to operate, easy to extend, and pleasant to use.
           </p>
-          {% if project.tech_stack %}
-          <div class="flex flex-wrap gap-2 mb-5">
-            {% for tech in project.get_tech_list %}
-            <span
-              class="px-2 py-0.5 bg-indigo-600/20 text-indigo-300 text-xs rounded-md border border-indigo-500/30"
-              >{{ tech }}</span
-            >
+          <p>
+            I care about clean data flows, readable code, deployment discipline, and UI details that make an application feel intentionally crafted.
+          </p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <span class="rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100">Django</span>
+          <span class="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-100">PostgreSQL</span>
+          <span class="rounded-full border border-amber-300/25 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-100">Docker</span>
+          <span class="rounded-full border border-violet-300/25 bg-violet-300/10 px-4 py-2 text-sm font-semibold text-violet-100">CI/CD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mx-auto mb-14 max-w-2xl text-center" data-aos>
+        <span class="section-kicker">What I Use</span>
+        <h2 class="mt-4 text-4xl font-black text-white lg:text-5xl">Tech Stack</h2>
+        <p class="mt-4 text-slate-400">Tools I use to build, ship, and maintain modern applications.</p>
+      </div>
+
+      {% if skill_categories %}
+      <div class="space-y-10">
+        {% for category, cat_skills in skill_categories.items %}
+        <div data-aos>
+          <h3 class="mb-5 flex items-center gap-3 text-lg font-bold text-slate-200">
+            <span class="h-px w-10 bg-cyan-300/60"></span>{{ category }}
+          </h3>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {% for skill in cat_skills %}
+            <div class="surface rounded-2xl p-5 card-hover">
+              <div class="mb-4 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 place-items-center rounded-xl bg-white/5 text-lg text-cyan-200"><i class="{{ skill.icon|default:'fa-solid fa-bolt' }}"></i></span>
+                  <span class="font-bold text-slate-100">{{ skill.name }}</span>
+                </div>
+                <span class="text-sm font-black text-cyan-200">{{ skill.proficiency }}%</span>
+              </div>
+              <div class="h-2 overflow-hidden rounded-full bg-slate-800">
+                <div class="skill-bar-fill h-full rounded-full bg-gradient-to-r from-cyan-300 via-violet-400 to-amber-300" data-width="{{ skill.proficiency }}%" style="width: 0%"></div>
+              </div>
+            </div>
             {% endfor %}
           </div>
-          {% endif %}
-          <div class="flex gap-3 mt-auto">
-            {% if project.github_url %}
-            <a
-              href="{{ project.github_url }}"
-              target="_blank"
-              class="flex-1 text-center py-2 glass rounded-lg text-slate-300 hover:text-white text-sm font-medium transition hover:bg-white/10"
-            >
-              <i class="fa-brands fa-github mr-1"></i>Code
-            </a>
-            {% endif %} {% if project.live_url %}
-            <a
-              href="{{ project.live_url }}"
-              target="_blank"
-              class="flex-1 text-center py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white text-sm font-medium transition"
-            >
-              <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>Live
-              Demo
-            </a>
-            {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-aos>
+        {% for item in default_skills %}
+        <div class="surface rounded-2xl p-5 card-hover">
+          <div class="mb-4 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-white/5 text-cyan-200"><i class="{{ item.icon }}"></i></span>
+              <span class="font-bold text-slate-100">{{ item.name }}</span>
+            </div>
+            <span class="text-sm font-black text-cyan-200">{{ item.pct }}%</span>
+          </div>
+          <div class="h-2 overflow-hidden rounded-full bg-slate-800">
+            <div class="skill-bar-fill h-full rounded-full bg-gradient-to-r from-cyan-300 via-violet-400 to-amber-300" data-width="{{ item.pct }}%" style="width: 0%"></div>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
+      {% endif %}
     </div>
-    {% else %}
-    <div class="text-center py-20 glass rounded-3xl" data-aos>
-      <div class="text-6xl mb-4">🚧</div>
-      <p class="text-slate-400">
-        Projects coming soon. Add them via the
-        <a href="/dashboard/" class="text-indigo-400 hover:underline"
-          >dashboard</a
-        >.
-      </p>
-    </div>
-    {% endif %}
-  </div>
-</section>
+  </section>
 
-<!-- ── CONTACT ──────────────────────────────────────────────────── -->
-<section id="contact" class="py-32 relative">
-  <div
-    class="absolute inset-0 bg-gradient-to-t from-indigo-950/20 to-transparent pointer-events-none"
-  ></div>
-  <div class="max-w-7xl mx-auto px-6 relative">
-    <div class="grid lg:grid-cols-2 gap-16 items-start">
-      <div data-aos>
-        <span
-          class="text-indigo-400 font-semibold text-sm uppercase tracking-widest"
-          >Let's Talk</span
-        >
-        <h2 class="text-4xl lg:text-5xl font-black mt-3 mb-6">
-          Get In <span class="grad-text">Touch</span>
-        </h2>
-        <p class="text-slate-400 leading-relaxed mb-10">
-          Have a project in mind? Want to collaborate or just say hi? My inbox
-          is always open.
+  <section id="projects" class="py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-14 max-w-2xl" data-aos>
+        <span class="section-kicker">Portfolio</span>
+        <h2 class="mt-4 text-4xl font-black text-white lg:text-5xl">Featured Projects</h2>
+        <p class="mt-4 text-slate-400">A selection of work managed from the dashboard and stored in PostgreSQL.</p>
+      </div>
+
+      {% if projects %}
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for project in projects %}
+        <article class="surface group flex overflow-hidden rounded-2xl card-hover" data-aos>
+          <div class="flex min-h-full w-full flex-col">
+            <div class="relative h-52 overflow-hidden bg-gradient-to-br from-cyan-950/70 via-slate-900 to-amber-950/60">
+              {% if project.image_url %}
+              <img src="{{ project.image_url }}" alt="{{ project.title }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+              {% else %}
+              <div class="grid h-full place-items-center text-5xl text-cyan-100/60"><i class="fa-solid fa-layer-group"></i></div>
+              {% endif %}
+              {% if project.featured %}
+              <span class="absolute right-4 top-4 rounded-full bg-amber-300 px-3 py-1 text-xs font-black text-slate-950">Featured</span>
+              {% endif %}
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="text-xl font-black text-white transition group-hover:text-cyan-200">{{ project.title }}</h3>
+              <p class="mt-3 flex-1 text-sm leading-7 text-slate-400">{{ project.description }}</p>
+              {% if project.tech_stack %}
+              <div class="mt-5 flex flex-wrap gap-2">
+                {% for tech in project.get_tech_list %}
+                <span class="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-semibold text-slate-300">{{ tech }}</span>
+                {% endfor %}
+              </div>
+              {% endif %}
+              <div class="mt-6 flex gap-3">
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" class="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center text-sm font-semibold text-slate-200 transition hover:bg-white/10">
+                  <i class="fa-brands fa-github mr-2"></i>Code
+                </a>
+                {% endif %}
+                {% if project.live_url %}
+                <a href="{{ project.live_url }}" target="_blank" class="flex-1 rounded-xl bg-cyan-300 px-4 py-3 text-center text-sm font-black text-slate-950 transition hover:bg-cyan-200">
+                  <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Live
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="surface rounded-2xl p-10 text-center" data-aos>
+        <div class="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-2xl bg-cyan-300/10 text-2xl text-cyan-200">
+          <i class="fa-solid fa-folder-plus"></i>
+        </div>
+        <p class="text-slate-400">
+          Projects will appear here after you add them in the <a href="/dashboard/" class="font-semibold text-cyan-200 hover:underline">dashboard</a>.
         </p>
-        <div class="space-y-5">
-          <div class="flex items-center gap-5 p-5 glass rounded-2xl">
-            <div
-              class="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center text-indigo-400"
-            >
-              <i class="fa-solid fa-envelope text-lg"></i>
-            </div>
-            <div>
-              <div
-                class="text-xs text-slate-500 uppercase tracking-wide mb-0.5"
-              >
-                Email
-              </div>
-              <a
-                href="mailto:turja.das@email.com"
-                class="text-slate-200 hover:text-indigo-300 transition"
-                >turja.das@email.com</a
-              >
-            </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <section id="research" class="py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-14 max-w-3xl" data-aos>
+        <span class="section-kicker">Published Research</span>
+        <h2 class="mt-4 text-4xl font-black text-white lg:text-5xl">Research Work</h2>
+        <p class="mt-4 text-slate-400">
+          Peer-reviewed work on zero-day intrusion detection, cross-dataset generalization, and intelligent security systems.
+        </p>
+      </div>
+
+      <article class="glass relative overflow-hidden rounded-2xl p-6 sm:p-8" data-aos>
+        <div class="absolute right-0 top-0 h-40 w-40 rounded-bl-[5rem] bg-cyan-300/10"></div>
+        <div class="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-cyan-300/50 via-violet-300/30 to-transparent"></div>
+
+        <div class="relative grid gap-8 lg:grid-cols-[auto_1fr] lg:items-start">
+          <div class="grid h-20 w-20 place-items-center rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-3xl text-cyan-200 shadow-xl shadow-cyan-950/20">
+            <i class="fa-solid fa-file-lines"></i>
           </div>
-          <div class="flex items-center gap-5 p-5 glass rounded-2xl">
-            <div
-              class="w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center text-purple-400"
-            >
-              <i class="fa-brands fa-linkedin text-lg"></i>
+
+          <div>
+            <div class="mb-4 flex flex-wrap gap-2">
+              <span class="rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-emerald-200">Published</span>
+              <span class="rounded-full border border-violet-300/25 bg-violet-300/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-violet-200">ICT Express</span>
+              <span class="rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-amber-200">2026</span>
             </div>
-            <div>
-              <div
-                class="text-xs text-slate-500 uppercase tracking-wide mb-0.5"
-              >
-                LinkedIn
-              </div>
-              <a
-                href="https://linkedin.com/in/turja-das"
-                target="_blank"
-                class="text-slate-200 hover:text-indigo-300 transition"
-                >linkedin.com/in/turja-das</a
-              >
+
+            <h3 class="max-w-4xl text-2xl font-black leading-tight text-white lg:text-3xl">
+              A cross-dataset based zero-day intrusion detection system by integrating siamese network and reinforcement learning
+            </h3>
+
+            <p class="mt-5 max-w-4xl text-slate-400 leading-8">
+              This publication presents a zero-day intrusion detection approach built for stronger cross-dataset performance by combining similarity learning with reinforcement learning.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3 text-sm text-slate-400">
+              <span class="rounded-xl border border-white/10 bg-white/5 px-3 py-2"><i class="fa-solid fa-shield-halved mr-2 text-cyan-200"></i>Zero-day IDS</span>
+              <span class="rounded-xl border border-white/10 bg-white/5 px-3 py-2"><i class="fa-solid fa-network-wired mr-2 text-violet-200"></i>Siamese Network</span>
+              <span class="rounded-xl border border-white/10 bg-white/5 px-3 py-2"><i class="fa-solid fa-brain mr-2 text-amber-200"></i>Reinforcement Learning</span>
             </div>
+
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="{% url 'research_paper_pdf' %}" target="_blank" class="inline-flex items-center justify-center rounded-xl bg-cyan-300 px-5 py-3 font-black text-slate-950 transition hover:-translate-y-1 hover:bg-cyan-200">
+                <i class="fa-solid fa-file-pdf mr-2"></i>Read PDF
+              </a>
+              <a href="https://doi.org/10.1016/j.icte.2026.05.001" target="_blank" class="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-slate-100 transition hover:-translate-y-1 hover:bg-white/10">
+                <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>View DOI
+              </a>
+            </div>
+
+            <p class="mt-5 break-all text-sm text-slate-500">
+              DOI: <a href="https://doi.org/10.1016/j.icte.2026.05.001" target="_blank" class="text-cyan-200 hover:underline">10.1016/j.icte.2026.05.001</a>
+            </p>
           </div>
-          <div class="flex items-center gap-5 p-5 glass rounded-2xl">
-            <div
-              class="w-12 h-12 bg-pink-600/20 rounded-xl flex items-center justify-center text-pink-400"
-            >
-              <i class="fa-brands fa-github text-lg"></i>
-            </div>
-            <div>
-              <div
-                class="text-xs text-slate-500 uppercase tracking-wide mb-0.5"
-              >
-                GitHub
-              </div>
-              <a
-                href="https://github.com/turja-das"
-                target="_blank"
-                class="text-slate-200 hover:text-indigo-300 transition"
-                >github.com/turja-das</a
-              >
-            </div>
-          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="py-28">
+    <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[.9fr_1.1fr]">
+      <div data-aos>
+        <span class="section-kicker">Let's Talk</span>
+        <h2 class="mt-4 text-4xl font-black text-white lg:text-5xl">Have something to build?</h2>
+        <p class="mt-5 text-slate-400 leading-8">
+          Send a message and it will be saved directly to PostgreSQL through the Django dashboard.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          <a href="mailto:turja.das@email.com" class="surface flex items-center gap-4 rounded-2xl p-5 transition hover:border-cyan-300/35">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-cyan-300/10 text-cyan-200"><i class="fa-solid fa-envelope"></i></span>
+            <span>
+              <span class="block text-xs font-bold uppercase tracking-widest text-slate-500">Email</span>
+              <span class="text-slate-200">turja.das@email.com</span>
+            </span>
+          </a>
+          <a href="https://linkedin.com/in/turja-das" target="_blank" class="surface flex items-center gap-4 rounded-2xl p-5 transition hover:border-violet-300/35">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-violet-300/10 text-violet-200"><i class="fa-brands fa-linkedin"></i></span>
+            <span>
+              <span class="block text-xs font-bold uppercase tracking-widest text-slate-500">LinkedIn</span>
+              <span class="text-slate-200">linkedin.com/in/turja-das</span>
+            </span>
+          </a>
         </div>
       </div>
 
       <div data-aos>
-        {% if messages %} {% for message in messages %}
-        <div
-          class="mb-6 px-5 py-4 rounded-xl text-sm flex items-center gap-3 {% if message.tags == 'success' %}bg-green-500/20 border border-green-500/40 text-green-300 {% else %}bg-red-500/20 border border-red-500/40 text-red-300{% endif %}"
-        >
-          <i
-            class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"
-          ></i>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="mb-5 rounded-xl border px-5 py-4 text-sm {% if message.tags == 'success' %}border-emerald-400/30 bg-emerald-400/10 text-emerald-200{% else %}border-rose-400/30 bg-rose-400/10 text-rose-200{% endif %}">
           {{ message }}
         </div>
-        {% endfor %} {% endif %}
+        {% endfor %}
+        {% endif %}
 
-        <form
-          method="POST"
-          action="#contact"
-          class="glass rounded-3xl p-8 space-y-5"
-        >
+        <form method="POST" action="#contact" class="glass rounded-2xl p-6 sm:p-8">
           {% csrf_token %}
-          <div class="grid sm:grid-cols-2 gap-5">
+          <div class="grid gap-5 sm:grid-cols-2">
             <div>
-              <label
-                class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
-                >Name *</label
-              >
-              {{ form.name }} {% if form.name.errors %}
-              <p class="text-red-400 text-xs mt-1">{{ form.name.errors.0 }}</p>
-              {% endif %}
+              <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-500">Name *</label>
+              {{ form.name }}
+              {% if form.name.errors %}<p class="mt-1 text-xs text-rose-300">{{ form.name.errors.0 }}</p>{% endif %}
             </div>
             <div>
-              <label
-                class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
-                >Email *</label
-              >
-              {{ form.email }} {% if form.email.errors %}
-              <p class="text-red-400 text-xs mt-1">{{ form.email.errors.0 }}</p>
-              {% endif %}
+              <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-500">Email *</label>
+              {{ form.email }}
+              {% if form.email.errors %}<p class="mt-1 text-xs text-rose-300">{{ form.email.errors.0 }}</p>{% endif %}
             </div>
           </div>
-          <div class="grid sm:grid-cols-2 gap-5">
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
             <div>
-              <label
-                class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
-                >Phone</label
-              >
+              <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-500">Phone</label>
               {{ form.phone }}
             </div>
             <div>
-              <label
-                class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
-                >Subject</label
-              >
+              <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-500">Subject</label>
               {{ form.subject }}
             </div>
           </div>
-          <div>
-            <label
-              class="text-xs text-slate-400 uppercase tracking-wide mb-2 block"
-              >Message *</label
-            >
-            {{ form.body }} {% if form.body.errors %}
-            <p class="text-red-400 text-xs mt-1">{{ form.body.errors.0 }}</p>
-            {% endif %}
+          <div class="mt-5">
+            <label class="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-500">Message *</label>
+            {{ form.body }}
+            {% if form.body.errors %}<p class="mt-1 text-xs text-rose-300">{{ form.body.errors.0 }}</p>{% endif %}
           </div>
-          <button
-            type="submit"
-            class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5"
-          >
+          <button type="submit" class="shine mt-6 w-full rounded-xl bg-cyan-300 px-5 py-4 font-black text-slate-950 transition hover:-translate-y-1 hover:bg-cyan-200">
             <i class="fa-solid fa-paper-plane mr-2"></i>Send Message
           </button>
         </form>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
+</main>
 {% endblock %}

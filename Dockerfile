@@ -33,7 +33,6 @@ COPY . .
 RUN mkdir -p /app/staticfiles /app/media && \
     DJANGO_SETTINGS_MODULE=portfolio.settings.production \
     SECRET_KEY=build-time-placeholder \
-    DATABASE_URL=sqlite:////tmp/build.db \
     python manage.py collectstatic --noinput || true
 
 RUN chown -R django:django /app

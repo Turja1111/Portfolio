@@ -1,11 +1,13 @@
-{% extends 'dashboard/base.html' %} {% block title %}Skills{% endblock %} {%
-block page_title %}Skills{% endblock %} {% block page_subtitle %}Manage your
-tech skills{% endblock %} {% block nav_skills %}active{% endblock %} {% block
-header_actions %}
+{% extends 'dashboard/base.html' %} 
+{% block title %}Skills{% endblock %} 
+{%block page_title %}Skills{% endblock %} 
+{% block page_subtitle %}Manage your tech skills{% endblock %} 
+{% block nav_skills %}active{% endblock %} {% block header_actions %}
 <a href="{% url 'dashboard:skill_create' %}" class="btn-primary">
   <i class="fa-solid fa-plus mr-2"></i>New Skill
 </a>
-{% endblock %} {% block content %} {% if skills %}
+{% endblock %} 
+{% block content %} {% if skills %}
 <div class="card overflow-hidden p-0">
   <table class="w-full">
     <thead>

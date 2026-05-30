@@ -1,7 +1,9 @@
-{% extends 'dashboard/base.html' %} {% block title %}Messages{% endblock %} {%
-block page_title %}Messages{% endblock %} {% block page_subtitle %}Contact form
-submissions{% endblock %} {% block nav_messages %}active{% endblock %} {% block
-content %} {% if msgs %}
+{% extends 'dashboard/base.html' %} 
+{% block title %}Messages{% endblock %} 
+{%block page_title %}Messages{% endblock %} 
+{% block page_subtitle %}Contact form submissions{% endblock %} 
+{% block nav_messages %}active{% endblock %} {% block content %} 
+{% if msgs %}
 <div class="space-y-4">
   {% for msg in msgs %}
   <div

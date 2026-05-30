@@ -1,53 +1,59 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth" data-theme="dark">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {% block title %}Turja Das — Full Stack Developer{% endblock %}
-    </title>
+    <title>{% block title %}Turja Das | Full Stack Developer{% endblock %}</title>
     <meta
       name="description"
-      content="{% block description %}Full-stack developer specializing in Python, Django, and modern web technologies.{% endblock %}"
+      content="{% block description %}Full-stack developer specializing in Python, Django, PostgreSQL, Docker, and modern web experiences.{% endblock %}"
     />
 
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
-            fontFamily: { sans: ["Inter", "sans-serif"] },
+            fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
             colors: {
-              brand: { DEFAULT: "#6366f1", dark: "#4f46e5", light: "#818cf8" },
+              ink: "#070b14",
+              panel: "#101827",
+              line: "rgba(255,255,255,0.12)",
             },
             animation: {
-              "fade-up": "fadeUp 0.6s ease forwards",
-              float: "float 6s ease-in-out infinite",
-              "pulse-slow": "pulse 4s cubic-bezier(0.4,0,0.6,1) infinite",
+              "fade-up": "fadeUp 0.8s cubic-bezier(.2,.8,.2,1) forwards",
+              "float-soft": "floatSoft 7s ease-in-out infinite",
+              "spin-slow": "spin 18s linear infinite",
+              shimmer: "shimmer 3s ease-in-out infinite",
+              "trace-line": "traceLine 2.8s ease-in-out infinite",
             },
             keyframes: {
               fadeUp: {
-                "0%": { opacity: 0, transform: "translateY(30px)" },
+                "0%": { opacity: 0, transform: "translateY(28px)" },
                 "100%": { opacity: 1, transform: "translateY(0)" },
               },
-              float: {
-                "0%,100%": { transform: "translateY(0px)" },
-                "50%": { transform: "translateY(-20px)" },
+              floatSoft: {
+                "0%,100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-14px)" },
+              },
+              shimmer: {
+                "0%,100%": { opacity: 0.55 },
+                "50%": { opacity: 1 },
+              },
+              traceLine: {
+                "0%": { transform: "translateX(-100%)" },
+                "55%,100%": { transform: "translateX(120%)" },
               },
             },
           },
         },
       };
     </script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <!-- Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -56,322 +62,246 @@
 
     <style>
       :root {
-        scroll-behavior: smooth;
+        color-scheme: dark;
+        scroll-padding-top: 88px;
       }
-      .dark {
-        --bg: #0f172a;
+
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 18% 8%, rgba(45, 212, 191, 0.14), transparent 28rem),
+          radial-gradient(circle at 82% 0%, rgba(99, 102, 241, 0.16), transparent 30rem),
+          linear-gradient(180deg, #07111f 0%, #0b1020 48%, #070b14 100%);
       }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: linear-gradient(to bottom, black, transparent 82%);
+      }
+
       .glass {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035));
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
       }
-      .glass-light {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(0, 0, 0, 0.08);
+
+      .surface {
+        background: rgba(15, 23, 42, 0.72);
+        border: 1px solid rgba(148, 163, 184, 0.18);
       }
+
       .grad-text {
-        background: linear-gradient(
-          135deg,
-          #6366f1 0%,
-          #a855f7 50%,
-          #ec4899 100%
-        );
+        background: linear-gradient(135deg, #67e8f9 0%, #a78bfa 48%, #fbbf24 100%);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         background-clip: text;
+        color: transparent;
       }
-      .blob {
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-        animation: blob 8s ease-in-out infinite;
+
+      .section-kicker {
+        color: #67e8f9;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
       }
-      @keyframes blob {
-        0%,
-        100% {
-          border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-        }
-        50% {
-          border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
-        }
-      }
-      .skill-bar-fill {
-        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-      }
+
       .nav-link {
         position: relative;
       }
+
       .nav-link::after {
         content: "";
         position: absolute;
-        bottom: -2px;
         left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #6366f1, #a855f7);
-        transition: width 0.3s ease;
-      }
-      .nav-link:hover::after {
+        bottom: -6px;
         width: 100%;
+        height: 2px;
+        transform: scaleX(0);
+        transform-origin: right;
+        background: linear-gradient(90deg, #22d3ee, #a78bfa, #f59e0b);
+        transition: transform 0.28s ease;
       }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
       .card-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
       }
+
       .card-hover:hover {
         transform: translateY(-8px);
+        border-color: rgba(103, 232, 249, 0.38);
       }
+
+      .skill-bar-fill {
+        transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .shine {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shine::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-110%);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+        animation: traceLine 4s ease-in-out infinite;
+      }
+
       [data-aos] {
         opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.7s ease;
+        transform: translateY(28px);
+        transition: opacity 0.75s ease, transform 0.75s ease;
       }
+
       [data-aos].aos-animate {
         opacity: 1;
         transform: translateY(0);
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
     </style>
     {% block extra_head %}{% endblock %}
   </head>
-  <body
-    class="dark bg-slate-900 text-slate-100 font-sans antialiased transition-colors duration-300"
-  >
-    <!-- Navbar -->
-    <nav
-      id="navbar"
-      class="fixed top-0 w-full z-50 transition-all duration-300"
-    >
-      <div
-        class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
-      >
-        <!-- Logo -->
-        <a href="#home" class="text-xl font-black tracking-tight">
-          <span class="grad-text">TD.</span>
+  <body class="bg-ink text-slate-100 font-sans antialiased">
+    <nav id="navbar" class="fixed top-0 z-50 w-full transition-all duration-300">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <a href="#home" class="group flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl border border-cyan-300/30 bg-cyan-300/10 font-black text-cyan-200">TD</span>
+          <span class="hidden text-sm font-bold tracking-wide text-slate-200 sm:block">Turja Das</span>
         </a>
 
-        <!-- Desktop nav -->
-        <ul class="hidden md:flex items-center gap-8">
-          <li>
-            <a
-              href="#home"
-              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              href="#about"
-              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              href="#skills"
-              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
-              >Skills</a
-            >
-          </li>
-          <li>
-            <a
-              href="#projects"
-              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
-              >Projects</a
-            >
-          </li>
-          <li>
-            <a
-              href="#contact"
-              class="nav-link text-sm font-medium text-slate-300 hover:text-white transition"
-              >Contact</a
-            >
-          </li>
+        <ul class="hidden items-center gap-6 md:flex">
+          <li><a href="#home" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Home</a></li>
+          <li><a href="#about" class="nav-link text-sm font-medium text-slate-300 hover:text-white">About</a></li>
+          <li><a href="#skills" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Skills</a></li>
+          <li><a href="#projects" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Projects</a></li>
+          <li><a href="#research" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Research</a></li>
+          <li><a href="#contact" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Contact</a></li>
         </ul>
 
-        <!-- Right controls -->
-        <div class="flex items-center gap-4">
-          <!-- Theme toggle -->
-          <button
-            id="themeToggle"
-            class="p-2 rounded-lg glass text-slate-300 hover:text-white transition"
-            aria-label="Toggle theme"
+        <div class="flex items-center gap-3">
+          <a
+            href="#contact"
+            class="hidden rounded-xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20 sm:inline-flex"
           >
-            <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
-          </button>
-          <!-- Mobile menu -->
-          <button
-            id="menuToggle"
-            class="md:hidden p-2 rounded-lg glass text-slate-300"
-          >
-            <i class="fa-solid fa-bars text-sm"></i>
+            Hire me
+          </a>
+          <button id="menuToggle" class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-200 md:hidden" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
           </button>
         </div>
       </div>
 
-      <!-- Mobile menu -->
-      <div
-        id="mobileMenu"
-        class="hidden md:hidden glass border-t border-white/10"
-      >
-        <ul class="px-6 py-4 flex flex-col gap-3">
-          <li>
-            <a
-              href="#home"
-              class="block text-slate-300 hover:text-white py-2 transition"
-              onclick="
-                document.getElementById('mobileMenu').classList.add('hidden')
-              "
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              href="#about"
-              class="block text-slate-300 hover:text-white py-2 transition"
-              onclick="
-                document.getElementById('mobileMenu').classList.add('hidden')
-              "
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              href="#skills"
-              class="block text-slate-300 hover:text-white py-2 transition"
-              onclick="
-                document.getElementById('mobileMenu').classList.add('hidden')
-              "
-              >Skills</a
-            >
-          </li>
-          <li>
-            <a
-              href="#projects"
-              class="block text-slate-300 hover:text-white py-2 transition"
-              onclick="
-                document.getElementById('mobileMenu').classList.add('hidden')
-              "
-              >Projects</a
-            >
-          </li>
-          <li>
-            <a
-              href="#contact"
-              class="block text-slate-300 hover:text-white py-2 transition"
-              onclick="
-                document.getElementById('mobileMenu').classList.add('hidden')
-              "
-              >Contact</a
-            >
-          </li>
+      <div id="mobileMenu" class="hidden border-t border-white/10 bg-slate-950/90 backdrop-blur-xl md:hidden">
+        <ul class="flex flex-col gap-1 px-6 py-4">
+          <li><a href="#home" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Home</a></li>
+          <li><a href="#about" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">About</a></li>
+          <li><a href="#skills" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Skills</a></li>
+          <li><a href="#projects" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Projects</a></li>
+          <li><a href="#research" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Research</a></li>
+          <li><a href="#contact" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Contact</a></li>
         </ul>
       </div>
     </nav>
 
     {% block body %}{% endblock %}
 
-    <!-- Footer -->
-    <footer class="border-t border-white/10 py-10 mt-20">
-      <div
-        class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4"
-      >
-        <p class="text-slate-400 text-sm">
-          © 2025 <span class="grad-text font-semibold">Turja Das</span>. Built
-          with Django &amp; Tailwind.
+    <footer class="border-t border-white/10 py-10">
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-6 md:flex-row">
+        <p class="text-sm text-slate-400">
+          (c) 2026 <span class="font-semibold text-slate-100">Turja Das</span>. Built with Django, Tailwind, and PostgreSQL.
         </p>
         <div class="flex items-center gap-5">
-          <a
-            href="https://github.com/turja-das"
-            target="_blank"
-            class="text-slate-400 hover:text-white transition text-lg"
-            ><i class="fa-brands fa-github"></i
-          ></a>
-          <a
-            href="https://linkedin.com/in/turja-das"
-            target="_blank"
-            class="text-slate-400 hover:text-indigo-400 transition text-lg"
-            ><i class="fa-brands fa-linkedin"></i
-          ></a>
-          <a
-            href="mailto:turja.das@email.com"
-            class="text-slate-400 hover:text-pink-400 transition text-lg"
-            ><i class="fa-solid fa-envelope"></i
-          ></a>
+          <a href="https://github.com/turja-das" target="_blank" class="text-lg text-slate-400 transition hover:text-white" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/turja-das" target="_blank" class="text-lg text-slate-400 transition hover:text-cyan-300" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="mailto:turja.das@email.com" class="text-lg text-slate-400 transition hover:text-amber-300" aria-label="Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
         </div>
       </div>
     </footer>
 
     <script>
-      // ── Theme Toggle ──────────────────────────────────────────────
-      const html = document.documentElement;
-      const themeToggle = document.getElementById("themeToggle");
-      const themeIcon = document.getElementById("themeIcon");
-      const savedTheme = localStorage.getItem("theme") || "dark";
-      applyTheme(savedTheme);
-
-      function applyTheme(theme) {
-        if (theme === "dark") {
-          html.classList.add("dark");
-          html.classList.remove("light");
-          document.body.classList.replace("bg-white", "bg-slate-900");
-          document.body.classList.replace("text-slate-900", "text-slate-100");
-          themeIcon.className = "fa-solid fa-moon text-sm";
-        } else {
-          html.classList.remove("dark");
-          html.classList.add("light");
-          document.body.style.background = "#f8fafc";
-          document.body.style.color = "#0f172a";
-          themeIcon.className = "fa-solid fa-sun text-sm text-yellow-400";
-        }
-        localStorage.setItem("theme", theme);
-      }
-
-      themeToggle.addEventListener("click", () => {
-        const current = localStorage.getItem("theme") || "dark";
-        applyTheme(current === "dark" ? "light" : "dark");
-      });
-
-      // ── Navbar scroll effect ──────────────────────────────────────
       const navbar = document.getElementById("navbar");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuToggle = document.getElementById("menuToggle");
+
       window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add("glass", "shadow-xl");
-        } else {
-          navbar.classList.remove("glass", "shadow-xl");
-        }
+        navbar.classList.toggle("bg-slate-950/80", window.scrollY > 24);
+        navbar.classList.toggle("backdrop-blur-xl", window.scrollY > 24);
+        navbar.classList.toggle("border-b", window.scrollY > 24);
+        navbar.classList.toggle("border-white/10", window.scrollY > 24);
       });
 
-      // ── Mobile menu ───────────────────────────────────────────────
-      document.getElementById("menuToggle").addEventListener("click", () => {
-        document.getElementById("mobileMenu").classList.toggle("hidden");
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
       });
 
-      // ── AOS (Animate on Scroll) ───────────────────────────────────
+      document.querySelectorAll(".mobile-link").forEach((link) => {
+        link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+      });
+
       const observer = new IntersectionObserver(
         (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) e.target.classList.add("aos-animate");
-          });
-        },
-        { threshold: 0.1 },
-      );
-      document
-        .querySelectorAll("[data-aos]")
-        .forEach((el) => observer.observe(el));
-
-      // ── Skill bars ────────────────────────────────────────────────
-      const skillObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.querySelectorAll(".skill-bar-fill").forEach((bar) => {
-                bar.style.width = bar.dataset.width;
-              });
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("aos-animate");
+              observer.unobserve(entry.target);
             }
           });
         },
-        { threshold: 0.3 },
+        { threshold: 0.12 },
       );
+
+      document.querySelectorAll("[data-aos]").forEach((el, index) => {
+        el.style.transitionDelay = `${Math.min(index * 55, 260)}ms`;
+        observer.observe(el);
+      });
+
+      const skillObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+                bar.style.width = bar.dataset.width;
+              });
+              skillObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.22 },
+      );
+
       const skillsSection = document.getElementById("skills");
       if (skillsSection) skillObserver.observe(skillsSection);
     </script>

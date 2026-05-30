@@ -1,11 +1,13 @@
-{% extends 'dashboard/base.html' %} {% block title %}Projects{% endblock %} {%
-block page_title %}Projects{% endblock %} {% block page_subtitle %}Manage your
-portfolio projects{% endblock %} {% block nav_projects %}active{% endblock %} {%
-block header_actions %}
+{% extends 'dashboard/base.html' %} 
+{% block title %}Projects{% endblock %} 
+{%block page_title %}Projects{% endblock %} 
+{% block page_subtitle %}Manage your portfolio projects{% endblock %} 
+{% block nav_projects %}active{% endblock %} {%block header_actions %}
 <a href="{% url 'dashboard:project_create' %}" class="btn-primary">
   <i class="fa-solid fa-plus mr-2"></i>New Project
 </a>
-{% endblock %} {% block content %} {% if projects %}
+{% endblock %} 
+{% block content %} {% if projects %}
 <div class="card overflow-hidden p-0">
   <table class="w-full">
     <thead>

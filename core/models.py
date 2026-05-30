@@ -12,7 +12,7 @@ class Skill(models.Model):
     ]
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other')
-    icon = models.CharField(max_length=100, blank=True, help_text='CSS class or emoji for icon')
+    icon = models.CharField(max_length=100, blank=True, help_text='Font Awesome CSS class for icon')
     proficiency = models.IntegerField(default=80, help_text='0-100 percentage')
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

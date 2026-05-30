@@ -1,8 +1,10 @@
-{% extends 'dashboard/base.html' %} {% block title %}Overview{% endblock %} {%
-block page_title %}Overview{% endblock %} {% block page_subtitle %}Your
-portfolio at a glance{% endblock %} {% block nav_overview %}active{% endblock %}
+{% extends 'dashboard/base.html' %} 
+{% block title %}Overview{% endblock %} 
+{%block page_title %}Overview{% endblock %} 
+{% block page_subtitle %}Your portfolio at a glance{% endblock %} 
+{% block nav_overview %}active{% endblock %}
 {% block content %}
-<!-- Metric cards -->
+
 <div class="grid grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
   <div class="card flex items-center gap-5">
     <div
@@ -51,7 +53,6 @@ portfolio at a glance{% endblock %} {% block nav_overview %}active{% endblock %}
 </div>
 
 <div class="grid lg:grid-cols-2 gap-6">
-  <!-- Recent messages -->
   <div class="card">
     <div class="flex items-center justify-between mb-5">
       <h2 class="font-bold text-white">Recent Messages</h2>
@@ -92,7 +93,6 @@ portfolio at a glance{% endblock %} {% block nav_overview %}active{% endblock %}
     {% endif %}
   </div>
 
-  <!-- Recent projects -->
   <div class="card">
     <div class="flex items-center justify-between mb-5">
       <h2 class="font-bold text-white">Recent Projects</h2>
