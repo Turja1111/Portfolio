@@ -1,19 +1,25 @@
 from django import forms
 from core.models import Project, Skill
 
+LOGIN_INPUT_CLASS = (
+    'w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 '
+    'text-white placeholder-slate-400 focus:outline-none '
+    'focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition'
+)
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=150,
         widget=forms.TextInput(attrs={
-            'class': 'w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition',
+            'class': LOGIN_INPUT_CLASS,
             'placeholder': 'Username',
             'autofocus': True,
         })
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition',
+            'class': LOGIN_INPUT_CLASS,
             'placeholder': 'Password',
         })
     )

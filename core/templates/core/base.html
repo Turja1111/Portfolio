@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,11 @@
       name="description"
       content="{% block description %}Full-stack developer specializing in Python, Django, PostgreSQL, Docker, and modern web experiences.{% endblock %}"
     />
+    <meta name="author" content="Turja Das" />
+    <meta name="theme-color" content="#070b14" />
+    <meta property="og:title" content="Turja Das | Full Stack Developer" />
+    <meta property="og:description" content="Full-stack developer specializing in Python, Django, PostgreSQL, Docker, and modern web experiences." />
+    <meta property="og:type" content="website" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -22,19 +27,39 @@
             },
             animation: {
               "fade-up": "fadeUp 0.8s cubic-bezier(.2,.8,.2,1) forwards",
+              "fade-down": "fadeDown 0.6s cubic-bezier(.2,.8,.2,1) forwards",
+              "fade-in": "fadeIn 1s ease forwards",
               "float-soft": "floatSoft 7s ease-in-out infinite",
+              "float-alt": "floatAlt 8s ease-in-out infinite",
               "spin-slow": "spin 18s linear infinite",
               shimmer: "shimmer 3s ease-in-out infinite",
               "trace-line": "traceLine 2.8s ease-in-out infinite",
+              "pulse-glow": "pulseGlow 2.5s ease-in-out infinite",
+              "border-flow": "borderFlow 4s linear infinite",
+              "scale-in": "scaleIn 0.5s cubic-bezier(.2,.8,.2,1) forwards",
+              wiggle: "wiggle 1s ease-in-out infinite",
             },
             keyframes: {
               fadeUp: {
-                "0%": { opacity: 0, transform: "translateY(28px)" },
+                "0%": { opacity: 0, transform: "translateY(32px)" },
                 "100%": { opacity: 1, transform: "translateY(0)" },
+              },
+              fadeDown: {
+                "0%": { opacity: 0, transform: "translateY(-20px)" },
+                "100%": { opacity: 1, transform: "translateY(0)" },
+              },
+              fadeIn: {
+                "0%": { opacity: 0 },
+                "100%": { opacity: 1 },
               },
               floatSoft: {
                 "0%,100%": { transform: "translateY(0)" },
                 "50%": { transform: "translateY(-14px)" },
+              },
+              floatAlt: {
+                "0%,100%": { transform: "translateY(0) rotate(0deg)" },
+                "33%": { transform: "translateY(-10px) rotate(1deg)" },
+                "66%": { transform: "translateY(-6px) rotate(-1deg)" },
               },
               shimmer: {
                 "0%,100%": { opacity: 0.55 },
@@ -44,14 +69,32 @@
                 "0%": { transform: "translateX(-100%)" },
                 "55%,100%": { transform: "translateX(120%)" },
               },
+              pulseGlow: {
+                "0%,100%": { boxShadow: "0 0 20px rgba(103,232,249,0.15)", opacity: 1 },
+                "50%": { boxShadow: "0 0 40px rgba(103,232,249,0.35)", opacity: 0.9 },
+              },
+              borderFlow: {
+                "0%": { backgroundPosition: "0% 50%" },
+                "50%": { backgroundPosition: "100% 50%" },
+                "100%": { backgroundPosition: "0% 50%" },
+              },
+              scaleIn: {
+                "0%": { opacity: 0, transform: "scale(0.85)" },
+                "100%": { opacity: 1, transform: "scale(1)" },
+              },
+              wiggle: {
+                "0%,100%": { transform: "rotate(-2deg)" },
+                "50%": { transform: "rotate(2deg)" },
+              },
             },
           },
         },
       };
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -66,40 +109,84 @@
         scroll-padding-top: 88px;
       }
 
+      /* â”€â”€â”€ Scroll progress bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, #22d3ee, #a78bfa, #f59e0b, #22d3ee);
+        background-size: 300% 100%;
+        animation: borderFlow 4s linear infinite;
+        z-index: 9999;
+        transition: width 0.1s linear;
+      }
+
+      /* â”€â”€â”€ Cursor glow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      #cursor-glow {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(103,232,249,0.07) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+        will-change: left, top;
+      }
+
       body {
         min-height: 100vh;
         background:
-          radial-gradient(circle at 18% 8%, rgba(45, 212, 191, 0.14), transparent 28rem),
-          radial-gradient(circle at 82% 0%, rgba(99, 102, 241, 0.16), transparent 30rem),
+          radial-gradient(ellipse at 18% 8%, rgba(45, 212, 191, 0.12), transparent 32rem),
+          radial-gradient(ellipse at 82% 0%, rgba(99, 102, 241, 0.14), transparent 34rem),
+          radial-gradient(ellipse at 50% 100%, rgba(251, 191, 36, 0.06), transparent 40rem),
           linear-gradient(180deg, #07111f 0%, #0b1020 48%, #070b14 100%);
+        overflow-x: hidden;
       }
 
+      /* â”€â”€â”€ Particle canvas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      #particle-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* â”€â”€â”€ Subtle grid overlay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       body::before {
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: -1;
+        z-index: 0;
         background-image:
-          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-        background-size: 64px 64px;
-        mask-image: linear-gradient(to bottom, black, transparent 82%);
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(to bottom, black 5%, transparent 75%);
+        -webkit-mask-image: linear-gradient(to bottom, black 5%, transparent 75%);
       }
 
+      /* â”€â”€â”€ Glass card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .glass {
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035));
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255,255,255,0.06);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
       }
 
       .surface {
-        background: rgba(15, 23, 42, 0.72);
-        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid rgba(148, 163, 184, 0.14);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
 
+      /* â”€â”€â”€ Gradient text â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .grad-text {
         background: linear-gradient(135deg, #67e8f9 0%, #a78bfa 48%, #fbbf24 100%);
         -webkit-background-clip: text;
@@ -107,7 +194,18 @@
         color: transparent;
       }
 
+      .grad-text-alt {
+        background: linear-gradient(135deg, #fbbf24, #f472b6, #a78bfa);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* â”€â”€â”€ Section kicker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .section-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         color: #67e8f9;
         font-size: 0.78rem;
         font-weight: 800;
@@ -115,6 +213,16 @@
         text-transform: uppercase;
       }
 
+      .section-kicker::before {
+        content: "";
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: linear-gradient(90deg, #22d3ee, #a78bfa);
+        border-radius: 2px;
+      }
+
+      /* â”€â”€â”€ Nav link underline â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .nav-link {
         position: relative;
       }
@@ -130,26 +238,73 @@
         transform-origin: right;
         background: linear-gradient(90deg, #22d3ee, #a78bfa, #f59e0b);
         transition: transform 0.28s ease;
+        border-radius: 2px;
       }
 
-      .nav-link:hover::after {
+      .nav-link:hover::after,
+      .nav-link.active::after {
         transform: scaleX(1);
         transform-origin: left;
       }
 
+      .nav-link.active {
+        color: #fff;
+      }
+
+      /* â”€â”€â”€ Card hover â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .card-hover {
-        transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+        transition: transform 0.35s cubic-bezier(.2,.8,.2,1), border-color 0.3s ease, box-shadow 0.3s ease;
       }
 
       .card-hover:hover {
         transform: translateY(-8px);
-        border-color: rgba(103, 232, 249, 0.38);
+        border-color: rgba(103, 232, 249, 0.3);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(103,232,249,0.08);
       }
 
+      /* â”€â”€â”€ 3D tilt card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .tilt-card {
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      .tilt-card:hover {
+        box-shadow: 0 30px 80px rgba(0,0,0,0.35), 0 0 40px rgba(103,232,249,0.06);
+      }
+
+      /* â”€â”€â”€ Gradient border (animated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .gradient-border {
+        position: relative;
+      }
+
+      .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, #22d3ee, #a78bfa, #f59e0b, #22d3ee);
+        background-size: 300% 300%;
+        animation: borderFlow 6s linear infinite;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+      }
+
+      .gradient-border:hover::before {
+        opacity: 1;
+      }
+
+      /* â”€â”€â”€ Skill bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .skill-bar-fill {
-        transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
+      /* â”€â”€â”€ Shine effect â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       .shine {
         position: relative;
         overflow: hidden;
@@ -160,14 +315,105 @@
         position: absolute;
         inset: 0;
         transform: translateX(-110%);
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
         animation: traceLine 4s ease-in-out infinite;
       }
 
+      /* â”€â”€â”€ Glow button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .glow-btn {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .glow-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 30px rgba(34, 211, 238, 0.25), 0 10px 40px rgba(0,0,0,0.2);
+      }
+
+      .glow-btn::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg, rgba(34,211,238,0.4), rgba(167,139,250,0.4), rgba(245,158,11,0.4));
+        border-radius: inherit;
+        z-index: -1;
+        filter: blur(12px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .glow-btn:hover::before {
+        opacity: 1;
+      }
+
+      /* â”€â”€â”€ Typewriter cursor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .typewriter-cursor {
+        display: inline-block;
+        width: 3px;
+        height: 1.1em;
+        background: #67e8f9;
+        margin-left: 2px;
+        animation: blink 1s step-end infinite;
+        vertical-align: text-bottom;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      /* â”€â”€â”€ Floating CV FAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .cv-fab {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 50;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #22d3ee, #a78bfa);
+        color: #0f172a;
+        font-size: 1.25rem;
+        box-shadow: 0 8px 32px rgba(34,211,238,0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: pulseGlow 2.5s ease-in-out infinite;
+      }
+
+      .cv-fab:hover {
+        transform: scale(1.12) translateY(-2px);
+        box-shadow: 0 12px 40px rgba(34,211,238,0.45);
+      }
+
+      .cv-fab .tooltip {
+        position: absolute;
+        right: 70px;
+        white-space: nowrap;
+        background: rgba(15,23,42,0.95);
+        border: 1px solid rgba(148,163,184,0.2);
+        color: #e2e8f0;
+        padding: 6px 14px;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateX(8px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        pointer-events: none;
+      }
+
+      .cv-fab:hover .tooltip {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* â”€â”€â”€ AOS (custom scroll reveal) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       [data-aos] {
         opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.75s ease, transform 0.75s ease;
+        transform: translateY(32px);
+        transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1);
       }
 
       [data-aos].aos-animate {
@@ -175,135 +421,410 @@
         transform: translateY(0);
       }
 
+      /* â”€â”€â”€ Stat counter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .stat-number {
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* â”€â”€â”€ Monospace accent â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* â”€â”€â”€ Reduced motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
           scroll-behavior: auto !important;
           transition-duration: 0.01ms !important;
         }
+        #particle-canvas, #cursor-glow { display: none !important; }
+      }
+
+      /* â”€â”€â”€ Custom scrollbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #070b14; }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #22d3ee, #a78bfa);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #67e8f9, #c4b5fd); }
+
+      /* â”€â”€â”€ Selection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      ::selection {
+        background: rgba(34,211,238,0.25);
+        color: #fff;
       }
     </style>
     {% block extra_head %}{% endblock %}
   </head>
   <body class="bg-ink text-slate-100 font-sans antialiased">
+    <!-- Scroll progress bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Particle background canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Mouse cursor glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- â”€â”€â”€ Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <nav id="navbar" class="fixed top-0 z-50 w-full transition-all duration-300">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="#home" class="group flex items-center gap-3">
-          <span class="grid h-10 w-10 place-items-center rounded-xl border border-cyan-300/30 bg-cyan-300/10 font-black text-cyan-200">TD</span>
-          <span class="hidden text-sm font-bold tracking-wide text-slate-200 sm:block">Turja Das</span>
+          <span class="relative grid h-10 w-10 place-items-center rounded-xl border border-cyan-300/30 bg-cyan-300/10 font-black text-cyan-200 transition-all group-hover:shadow-lg group-hover:shadow-cyan-500/20 group-hover:border-cyan-300/50">
+            TD
+          </span>
+          <span class="hidden text-sm font-bold tracking-wide text-slate-200 sm:block">
+            Turja Das
+            <span class="block text-[0.65rem] font-medium text-slate-500 tracking-widest uppercase">Full Stack Dev</span>
+          </span>
         </a>
 
-        <ul class="hidden items-center gap-6 md:flex">
-          <li><a href="#home" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Home</a></li>
-          <li><a href="#about" class="nav-link text-sm font-medium text-slate-300 hover:text-white">About</a></li>
-          <li><a href="#skills" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Skills</a></li>
-          <li><a href="#projects" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Projects</a></li>
-          <li><a href="#research" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Research</a></li>
-          <li><a href="#contact" class="nav-link text-sm font-medium text-slate-300 hover:text-white">Contact</a></li>
+        <ul class="hidden items-center gap-7 md:flex">
+          <li><a href="#home" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition" data-section="home">Home</a></li>
+          <li><a href="#about" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition" data-section="about">About</a></li>
+          <li><a href="#skills" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition" data-section="skills">Skills</a></li>
+          <li><a href="#projects" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition" data-section="projects">Projects</a></li>
+          <li><a href="#research" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition" data-section="research">Research</a></li>
+          <li><a href="#contact" class="nav-link text-sm font-medium text-slate-300 hover:text-white transition" data-section="contact">Contact</a></li>
         </ul>
 
         <div class="flex items-center gap-3">
           <a
+            href="{% url 'download_cv' %}"
+            class="hidden items-center gap-2 rounded-xl border border-amber-300/25 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20 hover:border-amber-300/40 sm:inline-flex"
+          >
+            <i class="fa-solid fa-download text-xs"></i>
+            Resume
+          </a>
+          <a
             href="#contact"
-            class="hidden rounded-xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20 sm:inline-flex"
+            class="hidden rounded-xl border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20 hover:border-cyan-300/50 lg:inline-flex"
           >
             Hire me
           </a>
-          <button id="menuToggle" class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-200 md:hidden" aria-label="Open menu">
+          <button id="menuToggle" class="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-slate-200 md:hidden transition hover:bg-white/10" aria-label="Open menu">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
       </div>
 
-      <div id="mobileMenu" class="hidden border-t border-white/10 bg-slate-950/90 backdrop-blur-xl md:hidden">
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-2xl md:hidden">
         <ul class="flex flex-col gap-1 px-6 py-4">
-          <li><a href="#home" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Home</a></li>
-          <li><a href="#about" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">About</a></li>
-          <li><a href="#skills" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Skills</a></li>
-          <li><a href="#projects" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Projects</a></li>
-          <li><a href="#research" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Research</a></li>
-          <li><a href="#contact" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white">Contact</a></li>
+          <li><a href="#home" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white transition">Home</a></li>
+          <li><a href="#about" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white transition">About</a></li>
+          <li><a href="#skills" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white transition">Skills</a></li>
+          <li><a href="#projects" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white transition">Projects</a></li>
+          <li><a href="#research" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white transition">Research</a></li>
+          <li><a href="#contact" class="mobile-link block rounded-lg px-3 py-3 text-slate-300 hover:bg-white/5 hover:text-white transition">Contact</a></li>
+          <li class="mt-2">
+            <a href="{% url 'download_cv' %}" class="flex items-center gap-2 rounded-lg bg-amber-300/10 px-3 py-3 text-amber-200 hover:bg-amber-300/20 transition">
+              <i class="fa-solid fa-download"></i> Download CV
+            </a>
+          </li>
         </ul>
       </div>
     </nav>
 
     {% block body %}{% endblock %}
 
-    <footer class="border-t border-white/10 py-10">
-      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-6 md:flex-row">
-        <p class="text-sm text-slate-400">
-          (c) 2026 <span class="font-semibold text-slate-100">Turja Das</span>. Built with Django, Tailwind, and PostgreSQL.
-        </p>
+    <!-- â”€â”€â”€ Floating CV FAB â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <a href="{% url 'download_cv' %}" class="cv-fab" aria-label="Download CV">
+      <i class="fa-solid fa-file-arrow-down"></i>
+      <span class="tooltip">Download CV</span>
+    </a>
+
+    <!-- â”€â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+    <footer class="relative border-t border-white/10 py-12">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent"></div>
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 md:flex-row">
+        <div class="text-center md:text-left">
+          <p class="text-sm text-slate-400">
+            &copy; 2026 <span class="font-semibold text-slate-100">Turja Das</span>. Crafted with Django, Tailwind & PostgreSQL.
+          </p>
+          <p class="mt-1 text-xs text-slate-600">Designed with precision. Built with passion.</p>
+        </div>
         <div class="flex items-center gap-5">
-          <a href="https://github.com/turja-das" target="_blank" class="text-lg text-slate-400 transition hover:text-white" aria-label="GitHub">
+          <a href="https://github.com/Turja1111" target="_blank" class="group grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-lg text-slate-400 transition hover:text-white hover:border-white/20 hover:bg-white/10" aria-label="GitHub">
             <i class="fa-brands fa-github"></i>
           </a>
-          <a href="https://linkedin.com/in/turja-das" target="_blank" class="text-lg text-slate-400 transition hover:text-cyan-300" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/saumik-das-turja" target="_blank" class="group grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-lg text-slate-400 transition hover:text-cyan-300 hover:border-cyan-300/30 hover:bg-cyan-300/10" aria-label="LinkedIn">
             <i class="fa-brands fa-linkedin"></i>
           </a>
-          <a href="mailto:turja.das@email.com" class="text-lg text-slate-400 transition hover:text-amber-300" aria-label="Email">
+          <a href="mailto:saumik.das.turja@gmail.com" class="group grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-lg text-slate-400 transition hover:text-amber-300 hover:border-amber-300/30 hover:bg-amber-300/10" aria-label="Email">
             <i class="fa-solid fa-envelope"></i>
           </a>
         </div>
       </div>
     </footer>
 
+    <!-- â”€â”€â”€ Scripts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <script>
-      const navbar = document.getElementById("navbar");
-      const mobileMenu = document.getElementById("mobileMenu");
-      const menuToggle = document.getElementById("menuToggle");
+      /* â”€â”€ Particle Canvas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const canvas = document.getElementById("particle-canvas");
+        const ctx = canvas.getContext("2d");
+        let w, h, particles = [];
+        const PARTICLE_COUNT = 60;
+        const CONNECT_DISTANCE = 140;
 
-      window.addEventListener("scroll", () => {
-        navbar.classList.toggle("bg-slate-950/80", window.scrollY > 24);
-        navbar.classList.toggle("backdrop-blur-xl", window.scrollY > 24);
-        navbar.classList.toggle("border-b", window.scrollY > 24);
-        navbar.classList.toggle("border-white/10", window.scrollY > 24);
-      });
+        function resize() {
+          w = canvas.width = window.innerWidth;
+          h = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
 
-      menuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
+        class Particle {
+          constructor() {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.vx = (Math.random() - 0.5) * 0.35;
+            this.vy = (Math.random() - 0.5) * 0.35;
+            this.r = Math.random() * 1.8 + 0.5;
+            this.alpha = Math.random() * 0.4 + 0.1;
+          }
+          update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > w) this.vx *= -1;
+            if (this.y < 0 || this.y > h) this.vy *= -1;
+          }
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(103,232,249,${this.alpha})`;
+            ctx.fill();
+          }
+        }
 
-      document.querySelectorAll(".mobile-link").forEach((link) => {
-        link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-      });
+        for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("aos-animate");
-              observer.unobserve(entry.target);
+        function animate() {
+          ctx.clearRect(0, 0, w, h);
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < CONNECT_DISTANCE) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(103,232,249,${0.06 * (1 - dist / CONNECT_DISTANCE)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
             }
+          }
+          requestAnimationFrame(animate);
+        }
+        animate();
+      })();
+
+      /* â”€â”€ Cursor Glow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const glow = document.getElementById("cursor-glow");
+        let mx = -999, my = -999;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          glow.style.left = mx + "px";
+          glow.style.top = my + "px";
+          glow.style.opacity = "1";
+        });
+        document.addEventListener("mouseleave", () => {
+          glow.style.opacity = "0";
+        });
+      })();
+
+      /* â”€â”€ Scroll Progress Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const bar = document.getElementById("scroll-progress");
+        window.addEventListener("scroll", () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          bar.style.width = progress + "%";
+        });
+      })();
+
+      /* â”€â”€ Navbar scroll effect + active section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const navbar = document.getElementById("navbar");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.querySelectorAll(".nav-link[data-section]");
+        const sections = document.querySelectorAll("section[id]");
+
+        window.addEventListener("scroll", () => {
+          const sy = window.scrollY;
+          navbar.classList.toggle("bg-slate-950/85", sy > 24);
+          navbar.classList.toggle("backdrop-blur-2xl", sy > 24);
+          navbar.classList.toggle("border-b", sy > 24);
+          navbar.classList.toggle("border-white/8", sy > 24);
+          navbar.classList.toggle("shadow-2xl", sy > 24);
+
+          // Active section highlighting
+          let current = "";
+          sections.forEach((section) => {
+            const top = section.offsetTop - 120;
+            if (sy >= top) current = section.getAttribute("id");
           });
-        },
-        { threshold: 0.12 },
-      );
-
-      document.querySelectorAll("[data-aos]").forEach((el, index) => {
-        el.style.transitionDelay = `${Math.min(index * 55, 260)}ms`;
-        observer.observe(el);
-      });
-
-      const skillObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.querySelectorAll(".skill-bar-fill").forEach((bar) => {
-                bar.style.width = bar.dataset.width;
-              });
-              skillObserver.unobserve(entry.target);
-            }
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.dataset.section === current);
           });
-        },
-        { threshold: 0.22 },
-      );
+        });
 
-      const skillsSection = document.getElementById("skills");
-      if (skillsSection) skillObserver.observe(skillsSection);
+        menuToggle.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+          const icon = menuToggle.querySelector("i");
+          icon.classList.toggle("fa-bars");
+          icon.classList.toggle("fa-xmark");
+        });
+
+        document.querySelectorAll(".mobile-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenu.classList.add("hidden");
+            const icon = menuToggle.querySelector("i");
+            icon.classList.add("fa-bars");
+            icon.classList.remove("fa-xmark");
+          });
+        });
+      })();
+
+      /* â”€â”€ Scroll Reveal (AOS) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("aos-animate");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll("[data-aos]").forEach((el, index) => {
+          el.style.transitionDelay = `${Math.min(index * 60, 300)}ms`;
+          observer.observe(el);
+        });
+      })();
+
+      /* â”€â”€ Skill Bar Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const skillObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+                  bar.style.width = bar.dataset.width;
+                });
+                skillObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 },
+        );
+
+        const skillsSection = document.getElementById("skills");
+        if (skillsSection) skillObserver.observe(skillsSection);
+      })();
+
+      /* â”€â”€ Counter Animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const counterObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.querySelectorAll("[data-count]").forEach((el) => {
+                  const target = parseInt(el.dataset.count, 10);
+                  const suffix = el.dataset.suffix || "";
+                  const duration = 2000;
+                  const startTime = performance.now();
+
+                  function step(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(target * eased) + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                  }
+                  requestAnimationFrame(step);
+                });
+                counterObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.25 },
+        );
+
+        document.querySelectorAll("[data-counter-group]").forEach((el) => {
+          counterObserver.observe(el);
+        });
+      })();
+
+      /* â”€â”€ 3D Tilt Card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        document.querySelectorAll(".tilt-card").forEach((card) => {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -6;
+            const rotateY = ((x - centerX) / centerX) * 6;
+            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+          });
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
+          });
+        });
+      })();
+
+      /* â”€â”€ Typewriter Effect â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+      (function () {
+        const el = document.getElementById("typewriter");
+        if (!el) return;
+        const phrases = JSON.parse(el.dataset.phrases || "[]");
+        if (!phrases.length) return;
+
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
+
+        function type() {
+          const current = phrases[phraseIndex];
+          if (isDeleting) {
+            el.textContent = current.substring(0, charIndex - 1);
+            charIndex--;
+          } else {
+            el.textContent = current.substring(0, charIndex + 1);
+            charIndex++;
+          }
+
+          let delay = isDeleting ? 35 : 65;
+
+          if (!isDeleting && charIndex === current.length) {
+            delay = 2200;
+            isDeleting = true;
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            delay = 500;
+          }
+
+          setTimeout(type, delay);
+        }
+
+        setTimeout(type, 1000);
+      })();
     </script>
     {% block extra_js %}{% endblock %}
   </body>

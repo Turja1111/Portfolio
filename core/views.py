@@ -59,3 +59,15 @@ def research_paper_pdf(request):
         content_type='application/pdf',
         filename=RESEARCH_PAPER_FILENAME,
     )
+
+
+def download_cv(request):
+    cv_path = settings.BASE_DIR / 'cv' / 'cv.pdf'
+    if not cv_path.exists():
+        raise Http404('CV PDF not found.')
+    return FileResponse(
+        cv_path.open('rb'),
+        content_type='application/pdf',
+        as_attachment=True,
+        filename='Turja_Das_CV.pdf',
+    )
