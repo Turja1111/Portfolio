@@ -12,11 +12,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         project, created = Project.objects.update_or_create(
-            title='SUMS — Smart University Management System',
+            title='SUMS - Smart University Management System',
             defaults={
                 'description': (
                     'A full-stack university management platform with role-based '
-                    'dashboards for Students, Teachers, and Admins — powered by '
+                    'dashboards for Students, Teachers, and Admins, powered by '
                     'AI-driven insights, 40+ REST API endpoints, and real-time analytics.'
                 ),
                 'long_description': (
@@ -28,19 +28,17 @@ class Command(BaseCommand):
                     'Django REST Framework on the backend and a responsive '
                     'frontend, the system handles enrollment, grading, '
                     'attendance, course management, and administrative '
-                    'reporting — all deployed on Render.'
+                    'reporting.'
                 ),
                 'tech_stack': (
                     'Python, Django, Django REST Framework, PostgreSQL, '
-                    'JavaScript, Tailwind CSS, AI/ML, Render'
+                    'JavaScript, Tailwind CSS, AI/ML, PythonAnywhere'
                 ),
                 'github_url': (
                     'https://github.com/Turja1111/'
                     'Smart-University-Management-System'
                 ),
-                'live_url': (
-                    'https://smart-university-management-system.onrender.com'
-                ),
+                'live_url': 'https://turja221b.pythonanywhere.com/login/',
                 'image_url': '',
                 'featured': True,
                 'order': 1,
