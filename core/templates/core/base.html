@@ -431,6 +431,76 @@
         font-family: "JetBrains Mono", monospace;
       }
 
+      .chatbot-shell {
+        position: fixed;
+        right: 2rem;
+        bottom: 6.5rem;
+        z-index: 60;
+      }
+
+      .chatbot-toggle {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #22d3ee, #a78bfa);
+        color: #0f172a;
+        font-size: 1.25rem;
+        box-shadow: 0 8px 32px rgba(34,211,238,0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .chatbot-toggle:hover {
+        transform: scale(1.08) translateY(-2px);
+        box-shadow: 0 12px 40px rgba(34,211,238,0.45);
+      }
+
+      .chatbot-panel {
+        position: absolute;
+        right: 0;
+        bottom: 4.5rem;
+        width: min(380px, calc(100vw - 2rem));
+        height: min(560px, calc(100vh - 8rem));
+        display: none;
+        overflow: hidden;
+        border-radius: 1.25rem;
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        background: rgba(15, 23, 42, 0.96);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+      }
+
+      .chatbot-panel.open {
+        display: flex;
+      }
+
+      .chatbot-messages {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(103,232,249,0.45) transparent;
+      }
+
+      @media (max-width: 640px) {
+        .chatbot-shell {
+          right: 1rem;
+          bottom: 5.75rem;
+        }
+
+        .chatbot-panel {
+          right: -0.5rem;
+          bottom: 4.25rem;
+          width: calc(100vw - 1rem);
+          height: min(620px, calc(100vh - 7rem));
+          border-radius: 1rem;
+        }
+
+        .cv-fab {
+          right: 1rem;
+          bottom: 1rem;
+        }
+      }
+
       /* â”€â”€â”€ Reduced motion â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
@@ -536,6 +606,59 @@
       <i class="fa-solid fa-file-arrow-down"></i>
       <span class="tooltip">Download CV</span>
     </a>
+
+    <div class="chatbot-shell">
+      <section id="chatbotPanel" class="chatbot-panel flex-col" aria-label="Portfolio chatbot" aria-hidden="true">
+        <header class="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-3">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-cyan-300/10 text-cyan-200">
+              <i class="fa-solid fa-message"></i>
+            </span>
+            <div>
+              <h2 class="text-sm font-black text-white">Ask Turja AI</h2>
+              <p class="text-xs text-slate-400">HR-ready portfolio answers</p>
+            </div>
+          </div>
+          <button id="chatbotClose" class="grid h-9 w-9 place-items-center rounded-lg text-slate-400 transition hover:bg-white/10 hover:text-white" type="button" aria-label="Close chat">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </header>
+
+        <div id="chatbotMessages" class="chatbot-messages flex-1 space-y-3 overflow-y-auto px-4 py-4">
+          <div class="rounded-2xl rounded-tl-sm border border-cyan-300/20 bg-cyan-300/10 px-4 py-3 text-sm leading-6 text-slate-100">
+            Hi, I can answer common HR questions about Turja's projects, skills, research, CV, contact details, and availability.
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button class="chatbot-chip rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/30 hover:text-cyan-100" type="button" data-prompt="Tell me about Turja's projects.">Projects</button>
+            <button class="chatbot-chip rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/30 hover:text-cyan-100" type="button" data-prompt="Why should we hire Turja?">Why hire?</button>
+            <button class="chatbot-chip rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/30 hover:text-cyan-100" type="button" data-prompt="What skills does Turja use most?">Skills</button>
+            <button class="chatbot-chip rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/30 hover:text-cyan-100" type="button" data-prompt="How can I contact Turja?">Contact</button>
+          </div>
+        </div>
+
+        <form id="chatbotForm" class="border-t border-white/10 bg-slate-950/70 p-3">
+          <div class="flex gap-2">
+            <input
+              id="chatbotInput"
+              class="min-w-0 flex-1 rounded-xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-300/70 focus:ring-2 focus:ring-cyan-300/15"
+              type="text"
+              maxlength="800"
+              autocomplete="off"
+              placeholder="Ask why hire, SUMS, skills..."
+              aria-label="Chat message"
+            />
+            <button id="chatbotSend" class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-cyan-300 font-black text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-60" type="submit" aria-label="Send message">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+          <p id="chatbotStatus" class="mt-2 hidden text-xs text-slate-500"></p>
+        </form>
+      </section>
+
+      <button id="chatbotToggle" class="chatbot-toggle" type="button" aria-label="Open portfolio chatbot" aria-expanded="false" aria-controls="chatbotPanel">
+        <i class="fa-solid fa-comments"></i>
+      </button>
+    </div>
 
     <!-- â”€â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <footer class="relative border-t border-white/10 py-12">
@@ -824,6 +947,102 @@
         }
 
         setTimeout(type, 1000);
+      })();
+
+      (function () {
+        const panel = document.getElementById("chatbotPanel");
+        const toggle = document.getElementById("chatbotToggle");
+        const close = document.getElementById("chatbotClose");
+        const form = document.getElementById("chatbotForm");
+        const input = document.getElementById("chatbotInput");
+        const send = document.getElementById("chatbotSend");
+        const messages = document.getElementById("chatbotMessages");
+        const status = document.getElementById("chatbotStatus");
+        if (!panel || !toggle || !form || !input || !messages) return;
+
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(";").shift();
+          return "";
+        }
+
+        function setOpen(isOpen) {
+          panel.classList.toggle("open", isOpen);
+          panel.setAttribute("aria-hidden", String(!isOpen));
+          toggle.setAttribute("aria-expanded", String(isOpen));
+          toggle.setAttribute("aria-label", isOpen ? "Close portfolio chatbot" : "Open portfolio chatbot");
+          const icon = toggle.querySelector("i");
+          if (icon) {
+            icon.classList.toggle("fa-comments", !isOpen);
+            icon.classList.toggle("fa-xmark", isOpen);
+          }
+          if (isOpen) setTimeout(() => input.focus(), 120);
+        }
+
+        function appendMessage(text, role) {
+          const item = document.createElement("div");
+          item.className = role === "user"
+            ? "ml-auto max-w-[85%] rounded-2xl rounded-tr-sm bg-cyan-300 px-4 py-3 text-sm leading-6 text-slate-950"
+            : "max-w-[88%] rounded-2xl rounded-tl-sm border border-white/10 bg-white/5 px-4 py-3 text-sm leading-6 text-slate-100";
+          item.textContent = text;
+          messages.appendChild(item);
+          messages.scrollTop = messages.scrollHeight;
+          return item;
+        }
+
+        function setLoading(isLoading) {
+          input.disabled = isLoading;
+          if (send) send.disabled = isLoading;
+          status.classList.toggle("hidden", !isLoading);
+          status.textContent = isLoading ? "Thinking..." : "";
+        }
+
+        async function sendMessage(rawMessage) {
+          const message = rawMessage.trim();
+          if (!message) return;
+
+          appendMessage(message, "user");
+          input.value = "";
+          setLoading(true);
+          const loadingBubble = appendMessage("Thinking...", "assistant");
+
+          try {
+            const response = await fetch("{% url 'chatbot_reply' %}", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken"),
+              },
+              body: JSON.stringify({ message }),
+            });
+            const data = await response.json();
+            loadingBubble.textContent = data.reply || data.error || "I could not answer that right now.";
+          } catch (error) {
+            loadingBubble.textContent = "The chatbot is unavailable right now. Please try again later.";
+          } finally {
+            setLoading(false);
+            input.focus();
+          }
+        }
+
+        toggle.addEventListener("click", () => {
+          setOpen(!panel.classList.contains("open"));
+        });
+
+        close.addEventListener("click", () => setOpen(false));
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          sendMessage(input.value);
+        });
+
+        document.querySelectorAll(".chatbot-chip").forEach((button) => {
+          button.addEventListener("click", () => {
+            setOpen(true);
+            sendMessage(button.dataset.prompt || button.textContent);
+          });
+        });
       })();
     </script>
     {% block extra_js %}{% endblock %}

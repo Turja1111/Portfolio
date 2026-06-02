@@ -4,7 +4,10 @@ Base Django settings for portfolio project.
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-production')
 
@@ -99,3 +102,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/dashboard/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
+
+DEEPSEEK_API_KEY = os.environ.get('DEEPSEEK_API_KEY', '')
+DEEPSEEK_API_URL = os.environ.get(
+    'DEEPSEEK_API_URL',
+    'https://api.deepseek.com/chat/completions',
+)
+DEEPSEEK_MODEL = os.environ.get('DEEPSEEK_MODEL', 'deepseek-v4-flash')
+CHATBOT_MAX_MESSAGE_LENGTH = int(os.environ.get('CHATBOT_MAX_MESSAGE_LENGTH', '800'))
+CHATBOT_USE_DEEPSEEK = os.environ.get('CHATBOT_USE_DEEPSEEK', 'False').lower() == 'true'

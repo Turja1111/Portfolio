@@ -1,14 +1,22 @@
+import json
+import time
+
 from django.conf import settings
+from django.http import JsonResponse
 from django.http import FileResponse, Http404
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_POST
 from .models import Project, Skill
 from .forms import ContactForm
+from .services.chatbot import ChatbotError, ask_portfolio_assistant
 
 
 RESEARCH_PAPER_FILENAME = 'A cross-dataset based zero-day intrusion detection system by integrating.pdf'
 
 
+@ensure_csrf_cookie
 def home(request):
     projects = Project.objects.all()
     skills = Skill.objects.all()
@@ -71,3 +79,34 @@ def download_cv(request):
         as_attachment=True,
         filename='Turja_Das_CV.pdf',
     )
+
+
+@require_POST
+def chatbot_reply(request):
+    now = time.time()
+    request_times = [
+        timestamp for timestamp in request.session.get('chatbot_request_times', [])
+        if now - timestamp < 60
+    ]
+
+    if len(request_times) >= 10:
+        return JsonResponse({
+            'error': 'Please wait a moment before sending more messages.'
+        }, status=429)
+
+    try:
+        payload = json.loads(request.body.decode('utf-8'))
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid chat request.'}, status=400)
+
+    message = str(payload.get('message', '')).strip()
+
+    try:
+        reply = ask_portfolio_assistant(message)
+    except ChatbotError as exc:
+        return JsonResponse({'error': str(exc)}, status=400)
+
+    request_times.append(now)
+    request.session['chatbot_request_times'] = request_times
+
+    return JsonResponse({'reply': reply, 'mode': 'portfolio'})
