@@ -245,6 +245,46 @@ def build_portfolio_context():
     ])
 
 
+def ask_openrouter(clean_message):
+    payload = {
+        "model": settings.OPENROUTER_MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are the portfolio assistant for Turja Das. "
+                    "Answer questions about Turja's projects, skills, research, CV, and contact details. "
+                    "Use the provided portfolio context as your source of truth. "
+                    "Be concise, friendly, and professional. "
+                    "If a question is unrelated to Turja's portfolio, politely guide the visitor back to projects, skills, research, or contact. "
+                    "Never claim Turja has skills, jobs, degrees, or achievements that are not in the context.\n\n"
+                    f"Portfolio context:\n{build_portfolio_context()}"
+                ),
+            },
+            {"role": "user", "content": clean_message},
+        ],
+        "temperature": 0.4,
+        "max_tokens": 420,
+        "stream": False,
+        "reasoning": {"enabled": True},
+    }
+
+    request = urllib.request.Request(
+        settings.OPENROUTER_API_URL,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {settings.OPENROUTER_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(request, timeout=20) as response:
+        data = json.loads(response.read().decode("utf-8"))
+
+    return data["choices"][0]["message"]["content"].strip()
+
+
 def ask_deepseek(clean_message):
     payload = {
         "model": settings.DEEPSEEK_MODEL,
@@ -287,18 +327,32 @@ def ask_deepseek(clean_message):
 def ask_portfolio_assistant(message):
     clean_message = normalize_message(message)
 
-    if not settings.CHATBOT_USE_DEEPSEEK or not settings.DEEPSEEK_API_KEY:
-        return answer_local_question(clean_message)
+    if settings.CHATBOT_USE_OPENROUTER and settings.OPENROUTER_API_KEY:
+        try:
+            return ask_openrouter(clean_message)
+        except (
+            urllib.error.HTTPError,
+            urllib.error.URLError,
+            TimeoutError,
+            json.JSONDecodeError,
+            KeyError,
+            IndexError,
+            TypeError,
+        ):
+            return answer_local_question(clean_message)
 
-    try:
-        return ask_deepseek(clean_message)
-    except (
-        urllib.error.HTTPError,
-        urllib.error.URLError,
-        TimeoutError,
-        json.JSONDecodeError,
-        KeyError,
-        IndexError,
-        TypeError,
-    ):
-        return answer_local_question(clean_message)
+    if settings.CHATBOT_USE_DEEPSEEK and settings.DEEPSEEK_API_KEY:
+        try:
+            return ask_deepseek(clean_message)
+        except (
+            urllib.error.HTTPError,
+            urllib.error.URLError,
+            TimeoutError,
+            json.JSONDecodeError,
+            KeyError,
+            IndexError,
+            TypeError,
+        ):
+            return answer_local_question(clean_message)
+
+    return answer_local_question(clean_message)

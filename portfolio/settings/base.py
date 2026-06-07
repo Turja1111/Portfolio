@@ -109,5 +109,12 @@ DEEPSEEK_API_URL = os.environ.get(
     'https://api.deepseek.com/chat/completions',
 )
 DEEPSEEK_MODEL = os.environ.get('DEEPSEEK_MODEL', 'deepseek-v4-flash')
+OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY', '')
+OPENROUTER_API_URL = os.environ.get(
+    'OPENROUTER_API_URL',
+    'https://openrouter.ai/api/v1/chat/completions',
+)
+OPENROUTER_MODEL = os.environ.get('OPENROUTER_MODEL', 'openai/gpt-oss-120b:free')
 CHATBOT_MAX_MESSAGE_LENGTH = int(os.environ.get('CHATBOT_MAX_MESSAGE_LENGTH', '800'))
 CHATBOT_USE_DEEPSEEK = os.environ.get('CHATBOT_USE_DEEPSEEK', 'False').lower() == 'true'
+CHATBOT_USE_OPENROUTER = os.environ.get('CHATBOT_USE_OPENROUTER', 'False').lower() == 'true'
