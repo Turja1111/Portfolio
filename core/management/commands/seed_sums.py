@@ -2,7 +2,7 @@
 Management command to seed the SUMS project into the portfolio database.
 Run: python manage.py seed_sums
 """
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand 
 
 from core.models import Project
 
