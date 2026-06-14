@@ -1,6 +1,6 @@
 ﻿<div align="center">
 
-# âœ¦ Turja Das â€” Portfolio
+# ✦ Turja Das — Portfolio
 
 **A premium, production-grade portfolio built with Django, PostgreSQL & Docker**
 
@@ -14,84 +14,84 @@
 
 <br />
 
-> A single-page developer portfolio with an animated dark-space aesthetic, glassmorphism UI, scroll-triggered animations, and a full admin dashboard â€” all backed by Django & PostgreSQL.
+> A single-page developer portfolio with an animated dark-space aesthetic, glassmorphism UI, scroll-triggered animations, and a full admin dashboard — all backed by Django & PostgreSQL.
 
 <br />
 
-[**Live Demo â†’**](#) Â· [**View Research Paper â†’**](#research) Â· [**Download CV â†’**](#)
+[**Live Demo →**](#) · [**View Research Paper →**](#research) · [**Download CV →**](#)
 
 </div>
 
 ---
 
-## ðŸŽ¯ Why This Project?
+## 🎯 Why This Project?
 
-This isn't a static HTML page â€” it's a **full-stack web application** that demonstrates production-level engineering:
+This isn't a static HTML page — it's a **full-stack web application** that demonstrates production-level engineering:
 
 - **Backend-driven content**: Projects, skills, and messages are stored in PostgreSQL and managed through a secure admin dashboard.
 - **CI/CD pipeline**: Every push runs flake8 lint + Django system checks via GitHub Actions.
 - **One-click deploy**: Render blueprint (`render.yaml`) deploys the entire stack in minutes.
-- **Professional UI/UX**: Particle backgrounds, cursor-tracking glow, scroll progress, typewriter effects, and micro-animations â€” all built with zero JavaScript frameworks.
+- **Professional UI/UX**: Particle backgrounds, cursor-tracking glow, scroll progress, typewriter effects, and micro-animations — all built with zero JavaScript frameworks.
 
 ---
 
-## âœ¨ Features
+## ✨ Features
 
 | Category | Details |
 |----------|---------|
-| ðŸŽ¨ **Glassmorphism UI** | Frosted-glass cards, gradient borders, and a dark-space color system |
-| ðŸŒŒ **Particle Background** | Live canvas-rendered particles with proximity-based connections |
-| âœï¸ **Typewriter Effect** | Rotating tagline with smooth type/delete animation |
-| ðŸ–±ï¸ **Cursor Glow** | Radial gradient that follows mouse movement |
-| ðŸ“Š **Animated Skill Bars** | Scroll-triggered progress bars with gradient fills |
-| ðŸ”¢ **Counter Animations** | Numbers that count up on scroll with easing |
-| ðŸ“± **Fully Responsive** | Mobile-first layout with collapsible navigation |
-| ðŸ›¡ï¸ **Admin Dashboard** | Session-based auth, CRUD for projects/skills, message inbox |
-| ðŸ“¬ **Contact Form** | Messages saved directly to PostgreSQL |
-| ðŸ“„ **CV Download** | Floating action button + navbar link for resume download |
-| ðŸ“‘ **Research Showcase** | Published paper display with in-browser PDF viewer |
-| ðŸ§­ **Scroll Progress** | Animated gradient progress bar at top of viewport |
-| â™¿ **Reduced Motion** | Respects `prefers-reduced-motion` for accessibility |
-| ðŸ” **SEO Optimized** | Open Graph tags, semantic HTML, proper heading hierarchy |
+| ✨ **Glassmorphism UI** | Frosted-glass cards, gradient borders, and a dark-space color system |
+| 🎨 **Particle Background** | Live canvas-rendered particles with proximity-based connections |
+| ✍️ **Typewriter Effect** | Rotating tagline with smooth type/delete animation |
+| 🖱️ **Cursor Glow** | Radial gradient that follows mouse movement |
+| 📊 **Animated Skill Bars** | Scroll-triggered progress bars with gradient fills |
+| 🔢 **Counter Animations** | Numbers that count up on scroll with easing |
+| 📱 **Fully Responsive** | Mobile-first layout with collapsible navigation |
+| 🛠️ **Admin Dashboard** | Session-based auth, CRUD for projects/skills, message inbox |
+| 💬 **Contact Form** | Messages saved directly to PostgreSQL |
+| 📄 **CV Download** | Floating action button + navbar link for resume download |
+| 📑 **Research Showcase** | Published paper display with in-browser PDF viewer |
+| 📜 **Scroll Progress** | Animated gradient progress bar at top of viewport |
+| ♿ **Reduced Motion** | Respects `prefers-reduced-motion` for accessibility |
+| 🔍 **SEO Optimized** | Open Graph tags, semantic HTML, proper heading hierarchy |
 
 ---
 
-## ðŸ“‚ Project Structure
+## 📂 Project Structure
 
 ```
 Portfolio/
-â”œâ”€â”€ core/                       # Main portfolio app
-â”‚   â”œâ”€â”€ models.py               # Project, Skill, Contact models
-â”‚   â”œâ”€â”€ views.py                # Home, CV download, research paper views
-â”‚   â”œâ”€â”€ forms.py                # Contact form with validation
-â”‚   â”œâ”€â”€ urls.py                 # URL routing
-â”‚   â””â”€â”€ templates/core/
-â”‚       â”œâ”€â”€ base.html           # Master layout (particles, nav, footer, JS)
-â”‚       â””â”€â”€ home.html           # Single-page portfolio sections
-â”œâ”€â”€ dashboard/                  # Admin dashboard app
-â”‚   â”œâ”€â”€ views.py                # CRUD views for projects, skills, messages
-â”‚   â”œâ”€â”€ forms.py                # Dashboard forms
-â”‚   â””â”€â”€ templates/dashboard/    # Dashboard templates
-â”œâ”€â”€ portfolio/                  # Django project config
-â”‚   â””â”€â”€ settings/
-â”‚       â”œâ”€â”€ base.py             # Shared settings
-â”‚       â”œâ”€â”€ development.py      # Local dev (SQLite)
-â”‚       â””â”€â”€ production.py       # Production (PostgreSQL, WhiteNoise)
-â”œâ”€â”€ static/picture/             # Profile image
-â”œâ”€â”€ cv/                         # Downloadable CV PDF
-â”œâ”€â”€ research/                   # Published research paper PDF
-â”œâ”€â”€ docker-compose.yml          # Local Docker environment
-â”œâ”€â”€ Dockerfile                  # Container build
-â”œâ”€â”€ render.yaml                 # Render deploy blueprint
-â”œâ”€â”€ build.sh                    # Production build script
-â”œâ”€â”€ requirements.txt            # Python dependencies
-â””â”€â”€ .github/workflows/
-    â””â”€â”€ deploy.yml              # CI pipeline (lint + check)
+├── core/                       # Main portfolio app
+│   ├── models.py               # Project, Skill, Contact models
+│   ├── views.py                # Home, CV download, research paper views
+│   ├── forms.py                # Contact form with validation
+│   ├── urls.py                 # URL routing
+│   └── templates/core/
+│       ├── base.html           # Master layout (particles, nav, footer, JS)
+│       └── home.html           # Single-page portfolio sections
+├── dashboard/                  # Admin dashboard app
+│   ├── views.py                # CRUD views for projects, skills, messages
+│   ├── forms.py                # Dashboard forms
+│   └── templates/dashboard/    # Dashboard templates
+├── portfolio/                  # Django project config
+│   └── settings/
+│       ├── base.py             # Shared settings
+│       ├── development.py      # Local dev (SQLite)
+│       └── production.py       # Production (PostgreSQL, WhiteNoise)
+├── static/picture/             # Profile image
+├── cv/                         # Downloadable CV PDF
+├── research/                   # Published research paper PDF
+├── docker-compose.yml          # Local Docker environment
+├── Dockerfile                  # Container build
+├── render.yaml                 # Render deploy blueprint
+├── build.sh                    # Production build script
+├── requirements.txt            # Python dependencies
+└── .github/workflows/
+    └── deploy.yml              # CI pipeline (lint + check)
 ```
 
 ---
 
-## ðŸš€ Quick Start
+## 🚀 Quick Start
 
 ### Option 1: Docker (Recommended)
 
@@ -132,7 +132,7 @@ pip install -r requirements.txt
 
 # Environment variables
 cp .env.example .env
-# Edit .env â€” set SECRET_KEY, DATABASE_URL, etc.
+# Edit .env — set SECRET_KEY, DATABASE_URL, etc.
 
 # Run migrations
 python manage.py migrate
@@ -149,7 +149,7 @@ python manage.py runserver
 
 ---
 
-## âš™ï¸ Environment Variables
+## ⚙️ Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -161,13 +161,13 @@ python manage.py runserver
 
 ---
 
-## ðŸŒ Deploy to Render
+## 🌐 Deploy to Render
 
 This project includes a **`render.yaml` blueprint** for one-click deployment:
 
 1. Fork this repository
 2. Go to [Render Dashboard](https://dashboard.render.com)
-3. Click **New â†’ Blueprint Instance**
+3. Click **New → Blueprint Instance**
 4. Connect your forked repo
 5. Render auto-detects `render.yaml` and provisions:
    - Python web service (free tier)
@@ -178,20 +178,20 @@ This project includes a **`render.yaml` blueprint** for one-click deployment:
 
 ---
 
-## ðŸ§ª CI Pipeline
+## 🧪 CI Pipeline
 
 Every push to `main` triggers:
 
 ```
-âœ“ flake8 lint (max line length: 120)
-âœ“ Django system check
+✓ flake8 lint (max line length: 120)
+✓ Django system check
 ```
 
 See [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) for the full workflow.
 
 ---
 
-## ðŸ“‘ Published Research
+## 📖 Published Research
 
 > **"A cross-dataset based zero-day intrusion detection system by integrating siamese network and reinforcement learning"**
 >
@@ -203,7 +203,7 @@ This paper presents a novel approach to zero-day intrusion detection, combining 
 
 ---
 
-## ðŸ› ï¸ Tech Stack
+## 🛠️ Tech Stack
 
 <div align="center">
 
@@ -225,7 +225,7 @@ This paper presents a novel approach to zero-day intrusion detection, combining 
 
 ---
 
-## ðŸ¤ Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Here's how:
 
@@ -237,17 +237,17 @@ Contributions are welcome! Here's how:
 
 ---
 
-## ðŸ“„ License
+## 📝 License
 
-This project is licensed under the **MIT License** â€” see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
 
-**Built with â¤ï¸ by [Turja Das](https://github.com/Turja1111)**
+**Built with ❤️ by [Turja Das](https://github.com/Turja1111)**
 
-*Full-Stack Developer Â· Django Â· PostgreSQL Â· Docker Â· DevOps*
+*Full-Stack Developer · Django · PostgreSQL · Docker · DevOps*
 
 [![GitHub](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white)](https://github.com/Turja1111)
 [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saumik-das-turja)
