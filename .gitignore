@@ -43,3 +43,6 @@ Thumbs.db
 
 # Git
 .git/
+
+# Deployment instructions
+INSTRUCTIONS.md
